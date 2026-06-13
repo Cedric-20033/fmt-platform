@@ -1,36 +1,170 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FMT e.V. - Site vitrine multilingue
 
-## Getting Started
+Site officiel de la Fondation Mefo Tuèbu, construit avec Next.js, TypeScript et `next-intl`.
+Le projet est organisé en trois langues (`fr`, `en`, `de`) et permet de faire évoluer facilement les contenus du site.
 
-First, run the development server:
+## Objectif du projet
+
+Ce dépôt contient le site vitrine public de la fondation.
+L’essentiel du contenu textuel se trouve dans les fichiers de traduction :
+
+- `messages/fr.json`
+- `messages/en.json`
+- `messages/de.json`
+
+Si vous devez mettre à jour les textes visibles sur le site, c’est généralement dans ces fichiers qu’il faut intervenir.
+
+## Technologies utilisées
+
+- Next.js 16
+- TypeScript
+- Tailwind CSS
+- `next-intl` pour les langues
+- Supabase et PostgreSQL pour les futures fonctionnalités d’administration
+
+## Prérequis
+
+- Node.js 20 ou supérieur
+- npm installé avec Node.js
+
+## Installation
+
+1. Ouvrez un terminal.
+2. Clonez le projet :
+
+```bash
+git clone <url-du-depot>
+```
+
+3. Entrez dans le dossier du projet :
+
+```bash
+cd fmt-platform
+```
+
+4. Installez les dépendances :
+
+```bash
+npm install
+```
+
+## Démarrer le projet
+
+Pour lancer le site en local :
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ensuite, ouvrez :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Le site redirige automatiquement vers la langue par défaut.
+Les versions localisées sont accessibles via :
 
-## Learn More
+- `http://localhost:3000/fr`
+- `http://localhost:3000/en`
+- `http://localhost:3000/de`
 
-To learn more about Next.js, take a look at the following resources:
+## Commandes utiles
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `npm run dev` : lance le serveur de développement
+- `npm run build` : crée la version de production
+- `npm run start` : démarre la version de production
+- `npm run lint` : vérifie la qualité du code
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Où modifier le contenu
 
-## Deploy on Vercel
+Le contenu éditorial du site est géré dans les fichiers suivants :
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `messages/fr.json`
+- `messages/en.json`
+- `messages/de.json`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Chaque fichier contient les textes de la même structure :
+
+- `nav` pour la navigation
+- `hero` pour la section d’accueil
+- `about` pour la présentation
+- `projects` pour les projets
+- `news` pour l’actualité
+- `events` pour les événements
+- `partners` pour les partenaires
+- `donate` pour la section de dons
+- `footer` pour le pied de page
+
+## Comment mettre les vrais contenus
+
+Quand vous remplacez les textes par les contenus définitifs, gardez toujours la même structure de clés dans les trois langues.
+
+Exemple :
+
+```json
+{
+  "hero": {
+    "headline": "Texte en français",
+    "subheadline": "Description en français"
+  }
+}
+```
+
+Dans `en.json` et `de.json`, gardez exactement les mêmes clés :
+
+```json
+{
+  "hero": {
+    "headline": "English text",
+    "subheadline": "English description"
+  }
+}
+```
+
+```json
+{
+  "hero": {
+    "headline": "Deutscher Text",
+    "subheadline": "Deutsche Beschreibung"
+  }
+}
+```
+
+### Règles à respecter
+
+- Ne changez pas les noms des clés.
+- Ajoutez une clé dans les trois fichiers en même temps.
+- Conservez le même niveau de structure dans chaque langue.
+- Vérifiez les accents, apostrophes et caractères spéciaux dans les textes finaux.
+
+## Où changer la langue par défaut
+
+La langue par défaut est définie dans :
+
+- `i18n/config.ts`
+
+Si vous souhaitez changer la langue par défaut du site, c’est ce fichier qu’il faut modifier.
+
+## Structure du projet
+
+- `app/` : pages et layouts Next.js
+- `components/` : composants réutilisables de l’interface
+- `messages/` : textes traduits
+- `i18n/` : configuration des langues et du routage
+- `lib/` : utilitaires et intégrations
+
+## Notes importantes
+
+- Le site utilise les Server Components par défaut.
+- Tailwind CSS sert à la mise en page et au style.
+- `fetch()` est privilégié pour les appels réseau.
+- Le projet est préparé pour une future partie administration avec Supabase.
+
+## Si vous voulez aller plus loin
+
+1. Remplacer les textes provisoires par les contenus définitifs.
+2. Vérifier la cohérence entre les trois langues.
+3. Préparer les images, logos et liens de contact finaux.
+4. Configurer les variables Supabase si la partie administration est activée.
+

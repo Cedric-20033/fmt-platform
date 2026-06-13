@@ -19,7 +19,7 @@ export function EventsSection() {
             <Badge variant="default" className="mb-4">{t("label")}</Badge>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">{t("title")}</h2>
           </div>
-          <Button asChild variant="outline" size="sm">
+          <Button asChild variant="outline" size="sm" disabled>
             <Link href={`/${locale}/events`}>
               {t("view_all")} <ArrowRight size={16} />
             </Link>
@@ -60,7 +60,7 @@ export function EventsSection() {
                       </div>
                     </div>
 
-                    <Button size="sm" variant={i % 2 === 0 ? "default" : "accent"} className="shrink-0">
+                    <Button size="sm" variant={i % 2 === 0 ? "default" : "accent"} className="shrink-0" disabled>
                       <CalendarDays size={14} />
                       {t("register")}
                     </Button>

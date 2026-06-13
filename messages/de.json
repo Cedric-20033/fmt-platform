@@ -97,6 +97,24 @@
     "amount_3": "100 €",
     "amount_4": "Anderer Betrag"
   },
+  "contact": {
+    "label": "Kontakt",
+    "title": "Kontaktieren Sie uns",
+    "description": "Wir stehen Ihnen für Fragen, Partnerschaften oder Informationen zu Spendemöglichkeiten gerne zur Verfügung.",
+    "address_label": "Adresse",
+    "address_value": "Mefo Tuèbu Stiftung (FMT e.V.)\nMusterstraße 12\n50667 Köln, Deutschland",
+    "phone_label": "Telefon",
+    "phone_value": "+49 221 123 456 78",
+    "phone_value_2": "+49 221 123 456 79",
+    "email_label": "E-Mail",
+    "email_value": "kontakt@fmt-ev.org",
+    "email_value_2": "partnerschaften@fmt-ev.org",
+    "hours_label": "Öffnungszeiten",
+    "hours_value": "Montag – Freitag: 9:00 – 17:00 Uhr\nSamstag: 10:00 – 13:00 Uhr\nSonntag: Geschlossen",
+    "social_label": "Soziale Netzwerke",
+    "social_description": "Folgen Sie unserer Arbeit und werden Sie Teil unserer Gemeinschaft.",
+    "legal_note": "FMT e.V. ist ein eingetragener Verein in Deutschland (Vereinsregister). Registernummer: VR 12345. Alle Kommunikationen werden gemäß der DSGVO verarbeitet."
+  },
   "footer": {
     "tagline": "Prävention · Education · Integration",
     "legal": "FMT e.V. ist ein eingetragener Verein in Deutschland gemäß deutschem Vereinsrecht.",

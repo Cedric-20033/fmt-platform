@@ -55,7 +55,8 @@ export async function Navbar() {
 
           <details className="group relative lg:hidden">
             <summary className="list-none cursor-pointer rounded-lg p-2 text-gray-600 hover:bg-gray-100 [&::-webkit-details-marker]:hidden">
-              <span className="sr-only"><Menu size={22} className="block group-open:hidden" /></span>
+              <span className="sr-only">-</span>
+              <Menu size={22} className="block group-open:hidden" />
               
               <X size={22} className="hidden group-open:block" />
             </summary>

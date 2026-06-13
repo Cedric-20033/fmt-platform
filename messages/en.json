@@ -97,6 +97,24 @@
     "amount_3": "€100",
     "amount_4": "Custom amount"
   },
+  "contact": {
+    "label": "Contact",
+    "title": "Get in touch",
+    "description": "We are available to answer your questions, welcome partnerships, or assist you with your donation process.",
+    "address_label": "Address",
+    "address_value": "Mefo Tuèbu Foundation (FMT e.V.)\nMusterstraße 12\n50667 Cologne, Germany",
+    "phone_label": "Phone",
+    "phone_value": "+49 221 123 456 78",
+    "phone_value_2": "+49 221 123 456 79",
+    "email_label": "Email",
+    "email_value": "contact@fmt-ev.org",
+    "email_value_2": "partnerships@fmt-ev.org",
+    "hours_label": "Office hours",
+    "hours_value": "Monday – Friday: 9:00 AM – 5:00 PM\nSaturday: 10:00 AM – 1:00 PM\nSunday: Closed",
+    "social_label": "Social media",
+    "social_description": "Follow our work and join our community.",
+    "legal_note": "FMT e.V. is an association registered in Germany (Vereinsregister). Registration number: VR 12345. All communications are processed in accordance with GDPR."
+  },
   "footer": {
     "tagline": "Prevention · Education · Integration",
     "legal": "FMT e.V. is an association registered in Germany in accordance with German association law.",

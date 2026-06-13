@@ -33,7 +33,7 @@ export async function generateMetadata({
       languages: Object.fromEntries(locales.map((l: string) => [l, `/${l}`])),
     },
     openGraph: {
-      title: "FMT e.V. â€” Fondation Mefo TuÃ¨bu",
+      title: "FMT e.V. - Fondation Mefo Tuèbu",
       description: t("subheadline"),
       locale,
       type: "website",

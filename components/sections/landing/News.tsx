@@ -8,7 +8,6 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-  CardContent,
   CardFooter,
 } from "@/components/ui/Card";
 
@@ -36,7 +35,7 @@ export function NewsSection() {
               {t("title")}
             </h2>
           </div>
-          <Button asChild variant="outline" size="sm">
+          <Button asChild variant="outline" size="sm" disabled>
             <Link href={`/${locale}/news`}>
               {t("view_all")} <ArrowRight size={16} />
             </Link>
@@ -64,6 +63,7 @@ export function NewsSection() {
                   variant="ghost"
                   size="sm"
                   className="px-0 text-[#2b8a8a] hover:px-2"
+                  disabled
                 >
                   {t("read_more")} <ArrowRight size={14} />
                 </Button>

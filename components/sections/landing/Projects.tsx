@@ -65,7 +65,7 @@ export function ProjectsSection() {
             <p className="text-gray-500 mt-3 max-w-xl">{t("description")}</p>
           </div>
           <Button asChild variant="outline" size="sm">
-            <Link href={`/${locale}/projects`}>
+            <Link href={`/${locale}/projects`} aria-disabled="true" className="pointer-events-none opacity-50">
               {t("view_all")} <ArrowRight size={16} />
             </Link>
           </Button>
@@ -94,7 +94,7 @@ export function ProjectsSection() {
                 </div>
               </CardContent>
               <CardFooter>
-                <Button variant="ghost" size="sm" className="px-0 hover:px-2">
+                <Button variant="ghost" size="sm" className="px-0 hover:px-2" disabled>
                   {t("view_all")} <ArrowRight size={14} />
                 </Button>
               </CardFooter>
