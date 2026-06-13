@@ -108,7 +108,7 @@ export function DonateSection() {
               disabled
             >
               <Heart size={18} />
-              {t("cta") + "gg"}
+              {t("cta")}
             </Button>
           </div>
         </div>
