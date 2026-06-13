@@ -1,26 +1,84 @@
 @import "tailwindcss";
 
+/* Jetons de design FMT e.V. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Palette de marque */
+  --teal-900: #1a5c5c;
+  --teal-700: #2b8a8a;
+  --teal-500: #3aafaf;
+  --teal-100: #e6f4f4;
+
+  --orange-600: #d97706;
+  --orange-500: #f39237;
+  --orange-100: #fff4e6;
+
+  /* Neutres */
+  --gray-950: #0f1012;
+  --gray-800: #1f2937;
+  --gray-600: #4b5563;
+  --gray-400: #9ca3af;
+  --gray-100: #f3f4f6;
+  --cream:    #f9f7f5;
+  --white:    #ffffff;
+
+  /* Variables sémantiques */
+  --background:      var(--cream);
+  --foreground:      var(--gray-800);
+  --primary:         var(--teal-700);
+  --primary-dark:    var(--teal-900);
+  --accent:          var(--orange-500);
+  --border:          #e5e7eb;
+  --radius:          0.625rem;
+}
+
+/* Pont de variables CSS pour Shadcn/UI */
+:root {
+  --background:    249 247 245;
+  --foreground:    31 41 55;
+  --card:          255 255 255;
+  --card-foreground: 31 41 55;
+  --popover:       255 255 255;
+  --popover-foreground: 31 41 55;
+  --primary:       43 138 138;
+  --primary-foreground: 255 255 255;
+  --secondary:     230 244 244;
+  --secondary-foreground: 26 92 92;
+  --muted:         243 244 246;
+  --muted-foreground: 107 114 128;
+  --accent:        243 146 55;
+  --accent-foreground: 255 255 255;
+  --destructive:   239 68 68;
+  --destructive-foreground: 255 255 255;
+  --border:        229 231 235;
+  --input:         229 231 235;
+  --ring:          43 138 138;
+  --radius:        0.625rem;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: rgb(var(--border));
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f9f7f5;
+  color: #1f2937;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Défilement fluide */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Décalage de défilement pour la navigation fixe */
+[id] {
+  scroll-margin-top: 80px;
 }

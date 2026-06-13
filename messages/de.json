@@ -1,0 +1,108 @@
+{
+  "nav": {
+    "about": "Über uns",
+    "projects": "Projekte",
+    "news": "Aktuelles",
+    "events": "Veranstaltungen",
+    "partners": "Partner",
+    "donate": "Spenden",
+    "contact": "Kontakt"
+  },
+  "hero": {
+    "badge": "Internationale Stiftung eingetragen in Deutschland",
+    "headline": "Prävention, Education, Integration",
+    "subheadline": "Die Mefo Tuèbu Stiftung setzt sich für eine gerechtere Welt ein, indem sie gefährdete Gemeinschaften durch Bildungs-, Präventions- und soziale Integrationsprogramme unterstützt.",
+    "cta_primary": "Unsere Projekte entdecken",
+    "cta_secondary": "Die Stiftung unterstützen",
+    "stat_projects": "Aktive Projekte",
+    "stat_beneficiaries": "Begünstigte",
+    "stat_countries": "Länder",
+    "stat_volunteers": "Freiwillige"
+  },
+  "about": {
+    "label": "Unsere Mission",
+    "title": "Gemeinsam für eine würdevolle Zukunft",
+    "description": "Gegründet auf der Überzeugung, dass jeder Mensch ein würdiges Leben verdient, entwickelt die Mefo Tuèbu Stiftung (FMT e.V.) konkrete Programme in drei grundlegenden Bereichen: Prävention sozialer Risiken, Zugang zu Bildung und Integration marginalisierter Bevölkerungsgruppen.",
+    "value_1_title": "Prävention",
+    "value_1_desc": "Aufklärungs- und Begleitprogramme zur Reduzierung sozialer Risiken, bevor sie zu Krisen werden.",
+    "value_2_title": "Bildung",
+    "value_2_desc": "Zugang zu Bildung für alle, unabhängig von sozialer Herkunft, Wohnort oder verfügbaren Ressourcen.",
+    "value_3_title": "Integration",
+    "value_3_desc": "Unterstützung gefährdeter Menschen auf dem Weg zur vollständigen und aktiven Teilhabe an der Gesellschaft."
+  },
+  "projects": {
+    "label": "Unsere Projekte",
+    "title": "Konkrete Maßnahmen vor Ort",
+    "description": "Jedes Projekt wird gemeinsam mit den betroffenen Gemeinschaften entwickelt, in ihren Realitäten verankert und auf nachhaltige Ergebnisse ausgerichtet.",
+    "view_all": "Alle Projekte anzeigen",
+    "status_active": "Aktiv",
+    "status_completed": "Abgeschlossen",
+    "status_planned": "Geplant",
+    "project_1_title": "Schule für alle in Subsahara-Afrika",
+    "project_1_desc": "Bau und Ausstattung von Klassenräumen in abgelegenen Gebieten, Lehrerfortbildung und Verteilung von Schulmaterial für 500 Kinder.",
+    "project_1_location": "Kamerun, Mali",
+    "project_2_title": "Integration von Geflüchteten in Deutschland",
+    "project_2_desc": "Sprachliche, administrative und soziale Unterstützung für neu angekommene Flüchtlingsfamilien in Deutschland mit persönlicher Begleitung.",
+    "project_2_location": "Deutschland",
+    "project_3_title": "Kommunale Gesundheitsprävention",
+    "project_3_desc": "Aufklärungskampagnen, Zugang zur Grundversorgung und Ausbildung von Gesundheitsmultiplikatoren in benachteiligten Vierteln.",
+    "project_3_location": "Côte d'Ivoire, Senegal"
+  },
+  "news": {
+    "label": "Aktuelles",
+    "title": "Bleiben Sie über unsere Arbeit informiert",
+    "read_more": "Weiterlesen",
+    "view_all": "Alle Nachrichten",
+    "news_1_title": "Einweihung der Schule in Ngaoundéré",
+    "news_1_excerpt": "Nach 18 Monaten Bauzeit und dank der Mobilisierung unserer Spender hat die Grundschule in Ngaoundéré ihre Türen für 120 Schüler geöffnet.",
+    "news_1_date": "5. Juni 2025",
+    "news_2_title": "Neue Partnerschaft mit dem Deutschen Roten Kreuz",
+    "news_2_excerpt": "FMT e.V. und das DRK bündeln ihre Kräfte, um die Integrationsmaßnahmen für Migranten in der Region Köln zu stärken.",
+    "news_2_date": "22. Mai 2025",
+    "news_3_title": "Jahresbericht 2024 verfügbar",
+    "news_3_excerpt": "Unser Jahresbericht beschreibt alle durchgeführten Maßnahmen, erzielten Ergebnisse und Perspektiven für 2025.",
+    "news_3_date": "10. April 2025"
+  },
+  "events": {
+    "label": "Veranstaltungen",
+    "title": "Machen Sie mit",
+    "view_all": "Alle Veranstaltungen",
+    "register": "Anmelden",
+    "event_1_title": "FMT Jährlicher Galaabend",
+    "event_1_desc": "Besuchen Sie unseren jährlichen Galaabend, eine einzigartige Gelegenheit, unsere Partner kennenzulernen und unsere Programme zu unterstützen.",
+    "event_1_date": "15. September 2025",
+    "event_1_location": "Köln, Deutschland",
+    "event_2_title": "Konferenz: Bildung und nachhaltige Entwicklung",
+    "event_2_desc": "Internationaler Runder Tisch zu Bildungsherausforderungen in Entwicklungsländern mit renommierten Referenten.",
+    "event_2_date": "3. Oktober 2025",
+    "event_2_location": "Berlin, Deutschland",
+    "event_3_title": "Solidaritätsmarathon 2025",
+    "event_3_desc": "Laufen Sie für einen guten Zweck! Jeder gelaufene Kilometer trägt direkt zur Finanzierung unserer Bildungsprojekte bei.",
+    "event_3_date": "18. Oktober 2025",
+    "event_3_location": "Frankfurt, Deutschland"
+  },
+  "partners": {
+    "label": "Partner",
+    "title": "Organisationen, die uns vertrauen",
+    "description": "Wir arbeiten mit öffentlichen Institutionen, internationalen NGOs und engagierten Unternehmen zusammen, die unsere Werte teilen."
+  },
+  "donate": {
+    "label": "Unterstützung",
+    "title": "Ihre Spende verändert Leben",
+    "description": "Jeder Beitrag, unabhängig von der Höhe, ermöglicht es der Mefo Tuèbu Stiftung, ihre Einsätze vor Ort fortzusetzen und auszuweiten.",
+    "cta": "Jetzt spenden",
+    "note": "FMT e.V. ist eine gemeinnützige Organisation, die in Deutschland eingetragen ist. Spenden sind steuerlich absetzbar.",
+    "amount_1": "25 €",
+    "amount_2": "50 €",
+    "amount_3": "100 €",
+    "amount_4": "Anderer Betrag"
+  },
+  "footer": {
+    "tagline": "Prävention · Education · Integration",
+    "legal": "FMT e.V. ist ein eingetragener Verein in Deutschland gemäß deutschem Vereinsrecht.",
+    "rights": "Alle Rechte vorbehalten.",
+    "privacy": "Datenschutzerklärung",
+    "legal_notice": "Impressum",
+    "contact": "Kontakt"
+  }
+}

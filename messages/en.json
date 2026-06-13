@@ -1,0 +1,108 @@
+{
+  "nav": {
+    "about": "About",
+    "projects": "Projects",
+    "news": "News",
+    "events": "Events",
+    "partners": "Partners",
+    "donate": "Donate",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "International foundation registered in Germany",
+    "headline": "Prevention, Education, Integration",
+    "subheadline": "The Mefo Tuèbu Foundation works towards a more just world by supporting vulnerable communities through education, prevention, and social integration programs.",
+    "cta_primary": "Explore our projects",
+    "cta_secondary": "Support the foundation",
+    "stat_projects": "Active projects",
+    "stat_beneficiaries": "Beneficiaries",
+    "stat_countries": "Countries",
+    "stat_volunteers": "Volunteers"
+  },
+  "about": {
+    "label": "Our mission",
+    "title": "Acting together for a dignified future",
+    "description": "Founded on the conviction that every human being deserves a dignified life, the Mefo Tuèbu Foundation (FMT e.V.) develops concrete programs in three fundamental areas: prevention of social risks, access to education, and integration of marginalized populations.",
+    "value_1_title": "Prevention",
+    "value_1_desc": "Awareness and support programs to reduce social risks before they become crises.",
+    "value_2_title": "Education",
+    "value_2_desc": "Access to education for all, regardless of social background, location, or available resources.",
+    "value_3_title": "Integration",
+    "value_3_desc": "Supporting vulnerable people towards full and active participation in society."
+  },
+  "projects": {
+    "label": "Our projects",
+    "title": "Concrete action on the ground",
+    "description": "Every project is designed with the communities involved, rooted in their realities, and oriented towards sustainable results.",
+    "view_all": "View all projects",
+    "status_active": "Active",
+    "status_completed": "Completed",
+    "status_planned": "Upcoming",
+    "project_1_title": "School for All in Sub-Saharan Africa",
+    "project_1_desc": "Construction and equipping of classrooms in remote areas, teacher training and distribution of school supplies for 500 children.",
+    "project_1_location": "Cameroon, Mali",
+    "project_2_title": "Refugee Integration in Germany",
+    "project_2_desc": "Linguistic, administrative, and social support for newly arrived refugee families in Germany, with personalized follow-up.",
+    "project_2_location": "Germany",
+    "project_3_title": "Community Health Prevention",
+    "project_3_desc": "Awareness campaigns, access to primary care, and training of health relays in underprivileged neighborhoods.",
+    "project_3_location": "Côte d'Ivoire, Senegal"
+  },
+  "news": {
+    "label": "News",
+    "title": "Stay informed about our work",
+    "read_more": "Read more",
+    "view_all": "All news",
+    "news_1_title": "Inauguration of Ngaoundéré School",
+    "news_1_excerpt": "After 18 months of construction and thanks to the mobilization of our donors, the Ngaoundéré primary school opened its doors to 120 students.",
+    "news_1_date": "June 5, 2025",
+    "news_2_title": "New partnership with the German Red Cross",
+    "news_2_excerpt": "FMT e.V. and the DRK join forces to strengthen migrant integration programs in the Cologne region.",
+    "news_2_date": "May 22, 2025",
+    "news_3_title": "2024 Annual Report available",
+    "news_3_excerpt": "Our annual report details all actions taken, results achieved, and perspectives for 2025.",
+    "news_3_date": "April 10, 2025"
+  },
+  "events": {
+    "label": "Events",
+    "title": "Join us",
+    "view_all": "All events",
+    "register": "Register",
+    "event_1_title": "FMT Annual Gala Evening",
+    "event_1_desc": "Join us for our annual gala evening, a unique opportunity to meet our partners and support our programs.",
+    "event_1_date": "September 15, 2025",
+    "event_1_location": "Cologne, Germany",
+    "event_2_title": "Conference: Education and Sustainable Development",
+    "event_2_desc": "International roundtable on education challenges in developing countries, featuring renowned speakers.",
+    "event_2_date": "October 3, 2025",
+    "event_2_location": "Berlin, Germany",
+    "event_3_title": "Solidarity Marathon 2025",
+    "event_3_desc": "Run for a good cause! Every kilometer covered directly contributes to funding our educational projects.",
+    "event_3_date": "October 18, 2025",
+    "event_3_location": "Frankfurt, Germany"
+  },
+  "partners": {
+    "label": "Partners",
+    "title": "Organizations that trust us",
+    "description": "We collaborate with public institutions, international NGOs, and committed companies that share our values."
+  },
+  "donate": {
+    "label": "Support",
+    "title": "Your donation changes lives",
+    "description": "Every contribution, regardless of the amount, enables the Mefo Tuèbu Foundation to continue and expand its missions in the field.",
+    "cta": "Donate now",
+    "note": "FMT e.V. Foundation is a non-profit organization registered in Germany. Donations are tax-deductible.",
+    "amount_1": "€25",
+    "amount_2": "€50",
+    "amount_3": "€100",
+    "amount_4": "Custom amount"
+  },
+  "footer": {
+    "tagline": "Prevention · Education · Integration",
+    "legal": "FMT e.V. is an association registered in Germany in accordance with German association law.",
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy",
+    "legal_notice": "Legal Notice",
+    "contact": "Contact"
+  }
+}

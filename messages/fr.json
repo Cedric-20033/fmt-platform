@@ -1,0 +1,108 @@
+{
+  "nav": {
+    "about": "À propos",
+    "projects": "Projets",
+    "news": "Actualités",
+    "events": "Événements",
+    "partners": "Partenaires",
+    "donate": "Faire un don",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Fondation internationale enregistrée en Allemagne",
+    "headline": "Prévention, Éducation, Intégration",
+    "subheadline": "La Fondation Mefo Tuèbu œuvre pour un monde plus juste en accompagnant les communautés vulnérables à travers des programmes d'éducation, de prévention et d'intégration sociale.",
+    "cta_primary": "Découvrir nos projets",
+    "cta_secondary": "Soutenir la fondation",
+    "stat_projects": "Projets actifs",
+    "stat_beneficiaries": "Bénéficiaires",
+    "stat_countries": "Pays d'intervention",
+    "stat_volunteers": "Bénévoles engagés"
+  },
+  "about": {
+    "label": "Notre mission",
+    "title": "Agir ensemble pour un avenir digne",
+    "description": "Fondée avec la conviction que chaque être humain mérite une vie digne, la Fondation Mefo Tuèbu (FMT e.V.) développe des programmes concrets dans trois domaines fondamentaux : la prévention des risques sociaux, l'accès à l'éducation et l'intégration des populations marginalisées.",
+    "value_1_title": "Prévention",
+    "value_1_desc": "Programmes de sensibilisation et d'accompagnement pour réduire les risques sociaux avant qu'ils ne deviennent des crises.",
+    "value_2_title": "Éducation",
+    "value_2_desc": "Accès à l'éducation pour tous, indépendamment de l'origine sociale, du lieu de vie ou des ressources disponibles.",
+    "value_3_title": "Intégration",
+    "value_3_desc": "Accompagnement des personnes vulnérables vers une participation pleine et active dans la société."
+  },
+  "projects": {
+    "label": "Nos projets",
+    "title": "Des actions concrètes sur le terrain",
+    "description": "Chaque projet est conçu avec les communautés concernées, ancré dans leurs réalités et orienté vers des résultats durables.",
+    "view_all": "Voir tous les projets",
+    "status_active": "En cours",
+    "status_completed": "Terminé",
+    "status_planned": "À venir",
+    "project_1_title": "École pour tous en Afrique subsaharienne",
+    "project_1_desc": "Construction et équipement de salles de classe dans des zones reculées, formation des enseignants et distribution de matériel scolaire pour 500 enfants.",
+    "project_1_location": "Cameroun, Mali",
+    "project_2_title": "Intégration des réfugiés en Allemagne",
+    "project_2_desc": "Accompagnement linguistique, administratif et social pour les familles réfugiées nouvellement arrivées en Allemagne, avec un suivi personnalisé.",
+    "project_2_location": "Allemagne",
+    "project_3_title": "Prévention santé communautaire",
+    "project_3_desc": "Campagnes de sensibilisation, accès aux soins primaires et formation de relais de santé dans les quartiers défavorisés.",
+    "project_3_location": "Côte d'Ivoire, Sénégal"
+  },
+  "news": {
+    "label": "Actualités",
+    "title": "Restez informés de nos actions",
+    "read_more": "Lire la suite",
+    "view_all": "Toutes les actualités",
+    "news_1_title": "Inauguration de l'école de Ngaoundéré",
+    "news_1_excerpt": "Après 18 mois de travaux et grâce à la mobilisation de nos donateurs, l'école primaire de Ngaoundéré a ouvert ses portes à 120 élèves.",
+    "news_1_date": "5 juin 2025",
+    "news_2_title": "Nouveau partenariat avec la Croix-Rouge allemande",
+    "news_2_excerpt": "FMT e.V. et la DRK unissent leurs forces pour renforcer les dispositifs d'intégration des migrants dans la région de Cologne.",
+    "news_2_date": "22 mai 2025",
+    "news_3_title": "Rapport annuel 2024 disponible",
+    "news_3_excerpt": "Notre rapport annuel détaille l'ensemble des actions menées, les résultats obtenus et les perspectives pour 2025.",
+    "news_3_date": "10 avril 2025"
+  },
+  "events": {
+    "label": "Événements",
+    "title": "Rejoignez-nous",
+    "view_all": "Tous les événements",
+    "register": "S'inscrire",
+    "event_1_title": "Soirée de gala annuelle FMT",
+    "event_1_desc": "Rejoignez-nous pour notre soirée de gala annuelle, une occasion unique de rencontrer nos partenaires et de soutenir nos programmes.",
+    "event_1_date": "15 septembre 2025",
+    "event_1_location": "Cologne, Allemagne",
+    "event_2_title": "Conférence : Éducation et développement durable",
+    "event_2_desc": "Table ronde internationale sur les enjeux de l'éducation dans les pays en développement, avec des intervenants de renom.",
+    "event_2_date": "3 octobre 2025",
+    "event_2_location": "Berlin, Allemagne",
+    "event_3_title": "Marathon solidaire 2025",
+    "event_3_desc": "Courez pour une bonne cause ! Chaque kilomètre parcouru contribue directement au financement de nos projets éducatifs.",
+    "event_3_date": "18 octobre 2025",
+    "event_3_location": "Francfort, Allemagne"
+  },
+  "partners": {
+    "label": "Partenaires",
+    "title": "Ils nous font confiance",
+    "description": "Nous collaborons avec des institutions publiques, des ONG internationales et des entreprises engagées qui partagent nos valeurs."
+  },
+  "donate": {
+    "label": "Soutien",
+    "title": "Votre don change des vies",
+    "description": "Chaque contribution, quelle que soit son montant, permet à la Fondation Mefo Tuèbu de poursuivre et d'élargir ses missions sur le terrain.",
+    "cta": "Faire un don maintenant",
+    "note": "La Fondation FMT e.V. est une organisation à but non lucratif enregistrée en Allemagne. Les dons sont déductibles des impôts.",
+    "amount_1": "25 €",
+    "amount_2": "50 €",
+    "amount_3": "100 €",
+    "amount_4": "Autre montant"
+  },
+  "footer": {
+    "tagline": "Prévention · Éducation · Intégration",
+    "legal": "FMT e.V. est une association enregistrée en Allemagne conformément au droit allemand des associations.",
+    "rights": "Tous droits réservés.",
+    "privacy": "Politique de confidentialité",
+    "legal_notice": "Mentions légales",
+    "contact": "Contact"
+  }
+}
