@@ -4,8 +4,10 @@ import { Menu, X } from "lucide-react";
 import { getLocale, getTranslations } from "next-intl/server";
 import { Button } from "@/components/ui/Button";
 import { LanguageSwitcher } from "./language-switcher";
+import { NavLinks } from "./NavLinks";
 
-const NAV_ITEMS = ["about", "projects", "news", "events", "partners"] as const;
+const NAV_ITEMS = ["about", "projects", "news", "events", "partners", "contact"] as const;
+type NavItem = (typeof NAV_ITEMS)[number];
 
 export async function Navbar() {
   const [locale, t] = await Promise.all([
@@ -13,7 +15,10 @@ export async function Navbar() {
     getTranslations("nav"),
   ]);
 
-  const navLink = (anchor: string) => `/${locale}#${anchor}`;
+  // Résolution des labels côté serveur, passés au client
+  const labels = Object.fromEntries(
+    NAV_ITEMS.map((item) => [item, t(item)])
+  ) as Record<NavItem, string>;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm">
@@ -34,16 +39,9 @@ export async function Navbar() {
             </div>
           </Link>
 
+          {/* Navigation desktop */}
           <nav className="hidden lg:flex items-center gap-1">
-            {NAV_ITEMS.map((item) => (
-              <Link
-                key={item}
-                href={navLink(item)}
-                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-[#2b8a8a] rounded-lg hover:bg-[#e6f4f4] transition-colors"
-              >
-                {t(item)}
-              </Link>
-            ))}
+            <NavLinks locale={locale} labels={labels} variant="desktop" />
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
@@ -53,25 +51,17 @@ export async function Navbar() {
             </Button>
           </div>
 
+          {/* Menu mobile */}
           <details className="group relative lg:hidden">
             <summary className="list-none cursor-pointer rounded-lg p-2 text-gray-600 hover:bg-gray-100 [&::-webkit-details-marker]:hidden">
-              <span className="sr-only">-</span>
+              <span className="sr-only">Menu</span>
               <Menu size={22} className="block group-open:hidden" />
-              
               <X size={22} className="hidden group-open:block" />
             </summary>
 
             <div className="fixed left-0 right-0 top-20 z-[90] bg-white border-t border-gray-100 shadow-2xl">
               <div className="max-w-7xl mx-auto px-4 py-4 flex max-h-[calc(100dvh-5rem)] flex-col gap-1 overflow-y-auto">
-                {NAV_ITEMS.map((item) => (
-                  <Link
-                    key={item}
-                    href={navLink(item)}
-                    className="px-4 py-3 text-sm font-medium text-gray-700 hover:text-[#2b8a8a] hover:bg-[#e6f4f4] rounded-lg transition-colors"
-                  >
-                    {t(item)}
-                  </Link>
-                ))}
+                <NavLinks locale={locale} labels={labels} variant="mobile" />
                 <div className="pt-4 mt-2 border-t border-gray-100 flex items-center justify-between gap-4">
                   <LanguageSwitcher />
                   <Button asChild size="sm" variant="accent">

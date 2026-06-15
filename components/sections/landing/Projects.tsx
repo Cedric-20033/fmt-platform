@@ -12,6 +12,9 @@ import {
   CardFooter,
 } from "@/components/ui/Card";
 
+import { Reveal } from "@/components/animations/Reveal";
+import { Typewriter } from "@/components/animations/TypeWriter";
+
 type ProjectKey = "project_1" | "project_2" | "project_3";
 type ProjectTitleKey = `${ProjectKey}_title`;
 type ProjectDescKey = `${ProjectKey}_desc`;
@@ -60,12 +63,16 @@ export function ProjectsSection() {
               {t("label")}
             </Badge>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">
-              {t("title")}
+              <Typewriter text={t("title")}  speed={50} />
             </h2>
             <p className="text-gray-500 mt-3 max-w-xl">{t("description")}</p>
           </div>
           <Button asChild variant="outline" size="sm">
-            <Link href={`/${locale}/projects`} aria-disabled="true" className="pointer-events-none opacity-50">
+            <Link
+              href={`/${locale}/projects`}
+              aria-disabled="true"
+              className="pointer-events-none opacity-50"
+            >
               {t("view_all")} <ArrowRight size={16} />
             </Link>
           </Button>
@@ -74,31 +81,39 @@ export function ProjectsSection() {
         {/* Cartes */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {PROJECTS.map(({ key, statusKey, accentColor }) => (
-            <Card
-              key={key}
-              className={`border-t-4 ${accentColor} hover:shadow-lg transition-shadow duration-300`}
-            >
-              <CardHeader>
-                <Badge variant={STATUS_BADGE[statusKey]} className="w-fit">
-                  {t(statusKey)}
-                </Badge>
-                <CardTitle className="mt-2">
-                  {t(`${key}_title` as ProjectTitleKey)}
-                </CardTitle>
-                <CardDescription>{t(`${key}_desc` as ProjectDescKey)}</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center gap-2 text-xs text-gray-400">
-                  <MapPin size={13} />
-                  <span>{t(`${key}_location` as ProjectLocationKey)}</span>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button variant="ghost" size="sm" className="px-0 hover:px-2" disabled>
-                  {t("view_all")} <ArrowRight size={14} />
-                </Button>
-              </CardFooter>
-            </Card>
+            <Reveal from="up" delay={0.1} key={key}>
+              <Card
+                className={`border-t-4 ${accentColor} hover:shadow-lg transition-shadow duration-300`}
+              >
+                <CardHeader>
+                  <Badge variant={STATUS_BADGE[statusKey]} className="w-fit">
+                    {t(statusKey)}
+                  </Badge>
+                  <CardTitle className="mt-2">
+                    {t(`${key}_title` as ProjectTitleKey)}
+                  </CardTitle>
+                  <CardDescription>
+                    {t(`${key}_desc` as ProjectDescKey)}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center gap-2 text-xs text-gray-400">
+                    <MapPin size={13} />
+                    <span>{t(`${key}_location` as ProjectLocationKey)}</span>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="px-0 hover:px-2"
+                    disabled
+                  >
+                    {t("view_all")} <ArrowRight size={14} />
+                  </Button>
+                </CardFooter>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -1,6 +1,8 @@
 import { useTranslations } from "next-intl";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
+import { Reveal } from "@/components/animations/Reveal";
+import { Typewriter } from "@/components/animations/TypeWriter";
 
 /** SVG brand icons — lucide-react does not include social platform icons. */
 const IconFacebook = () => (
@@ -58,7 +60,7 @@ export function ContactSection() {
         <div className="mb-14">
           <Badge variant="default" className="mb-4">{t("label")}</Badge>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">
-            {t("title")}
+            <Typewriter text={t("title")}  speed={50} />
           </h2>
           <p className="text-gray-500 mt-3 max-w-xl">{t("description")}</p>
         </div>
@@ -68,6 +70,7 @@ export function ContactSection() {
           {/* Info cards — 2 columns on the left */}
           <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
 
+            <Reveal from="up" delay={0.1}>
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
               <div className="w-10 h-10 rounded-xl bg-[#e6f4f4] flex items-center justify-center mb-4">
                 <MapPin size={20} className="text-[#2b8a8a]" />
@@ -77,7 +80,9 @@ export function ContactSection() {
                 {t("address_value")}
               </p>
             </div>
+            </Reveal>
 
+            <Reveal from="up" delay={0.1}>
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
               <div className="w-10 h-10 rounded-xl bg-[#e6f4f4] flex items-center justify-center mb-4">
                 <Phone size={20} className="text-[#2b8a8a]" />
@@ -96,7 +101,9 @@ export function ContactSection() {
                 {t("phone_value_2")}
               </a>
             </div>
+            </Reveal>
 
+            <Reveal from="up" delay={0.1}>
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
               <div className="w-10 h-10 rounded-xl bg-[#fff4e6] flex items-center justify-center mb-4">
                 <Mail size={20} className="text-[#f39237]" />
@@ -115,7 +122,9 @@ export function ContactSection() {
                 {t("email_value_2")}
               </a>
             </div>
+            </Reveal>
 
+            <Reveal from="up" delay={0.1}>
             <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
               <div className="w-10 h-10 rounded-xl bg-[#e6f4f4] flex items-center justify-center mb-4">
                 <Clock size={20} className="text-[#2b8a8a]" />
@@ -125,6 +134,7 @@ export function ContactSection() {
                 {t("hours_value")}
               </p>
             </div>
+            </Reveal>
           </div>
 
           {/* Right column */}
