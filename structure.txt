@@ -18,7 +18,6 @@
 |   |-- loading.tsx
 |   |-- not-found.tsx
 |   `-- page.tsx
-|-- architecture.txt
 |-- components
 |   |-- layout
 |   |   |-- footer.tsx
@@ -38,7 +37,9 @@
 |       |-- Badge.tsx
 |       |-- Button.tsx
 |       |-- Card.tsx
-|       `-- Separator.tsx
+|       |-- MediaGallery.tsx
+|       |-- Separator.tsx
+|       `-- ShowImage.tsx
 |-- eslint.config.mjs
 |-- i18n
 |   |-- config.ts
@@ -46,11 +47,16 @@
 |   |-- request.ts
 |   `-- routing.ts
 |-- lib
+|   |-- data
+|   |   |-- event.ts
+|   |   `-- static
+|   |       `-- events.data.ts
 |   |-- supabase
 |   |   |-- client.ts
 |   |   `-- server.ts
 |   `-- utils
-|       `-- Cn.ts
+|       |-- Cn.ts
+|       `-- date.ts
 |-- messages
 |   |-- de.json
 |   |-- en.json
@@ -61,14 +67,7 @@
 |-- package.json
 |-- postcss.config.mjs
 |-- proxy.ts
-|-- public
-|   |-- file.svg
-|   |-- globe.svg
-|   |-- images
-|   |   `-- logo.png
-|   |-- next.svg
-|   |-- vercel.svg
-|   `-- window.svg
+|-- structure.txt
 |-- tests
 |   |-- components
 |   |-- hooks
@@ -86,4 +85,4 @@
 |   `-- rbac.ts
 `-- vitest.config.ts
 
-22 directories, 64 files
+22 directories, 63 files
