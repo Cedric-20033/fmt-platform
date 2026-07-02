@@ -65,21 +65,7 @@
   },
   "events": {
     "label": "Événements",
-    "title": "Rejoignez-nous",
-    "view_all": "Tous les événements",
-    "register": "S'inscrire",
-    "event_1_title": "Soirée de gala annuelle FMT",
-    "event_1_desc": "Rejoignez-nous pour notre soirée de gala annuelle, une occasion unique de rencontrer nos partenaires et de soutenir nos programmes.",
-    "event_1_date": "15 septembre 2025",
-    "event_1_location": "Cologne, Allemagne",
-    "event_2_title": "Conférence : Éducation et développement durable",
-    "event_2_desc": "Table ronde internationale sur les enjeux de l'éducation dans les pays en développement, avec des intervenants de renom.",
-    "event_2_date": "3 octobre 2025",
-    "event_2_location": "Berlin, Allemagne",
-    "event_3_title": "Marathon solidaire 2025",
-    "event_3_desc": "Courez pour une bonne cause ! Chaque kilomètre parcouru contribue directement au financement de nos projets éducatifs.",
-    "event_3_date": "18 octobre 2025",
-    "event_3_location": "Francfort, Allemagne"
+    "title": "Rejoignez-nous"
   },
   "partners": {
     "label": "Partenaires",
