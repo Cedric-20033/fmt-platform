@@ -65,21 +65,7 @@
   },
   "events": {
     "label": "Events",
-    "title": "Join us",
-    "view_all": "All events",
-    "register": "Register",
-    "event_1_title": "FMT Annual Gala Evening",
-    "event_1_desc": "Join us for our annual gala evening, a unique opportunity to meet our partners and support our programs.",
-    "event_1_date": "September 15, 2025",
-    "event_1_location": "Cologne, Germany",
-    "event_2_title": "Conference: Education and Sustainable Development",
-    "event_2_desc": "International roundtable on education challenges in developing countries, featuring renowned speakers.",
-    "event_2_date": "October 3, 2025",
-    "event_2_location": "Berlin, Germany",
-    "event_3_title": "Solidarity Marathon 2025",
-    "event_3_desc": "Run for a good cause! Every kilometer covered directly contributes to funding our educational projects.",
-    "event_3_date": "October 18, 2025",
-    "event_3_location": "Frankfurt, Germany"
+    "title": "Join us"
   },
   "partners": {
     "label": "Partners",

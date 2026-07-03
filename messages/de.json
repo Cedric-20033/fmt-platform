@@ -65,21 +65,7 @@
   },
   "events": {
     "label": "Veranstaltungen",
-    "title": "Machen Sie mit",
-    "view_all": "Alle Veranstaltungen",
-    "register": "Anmelden",
-    "event_1_title": "FMT Jährlicher Galaabend",
-    "event_1_desc": "Besuchen Sie unseren jährlichen Galaabend, eine einzigartige Gelegenheit, unsere Partner kennenzulernen und unsere Programme zu unterstützen.",
-    "event_1_date": "15. September 2025",
-    "event_1_location": "Köln, Deutschland",
-    "event_2_title": "Konferenz: Bildung und nachhaltige Entwicklung",
-    "event_2_desc": "Internationaler Runder Tisch zu Bildungsherausforderungen in Entwicklungsländern mit renommierten Referenten.",
-    "event_2_date": "3. Oktober 2025",
-    "event_2_location": "Berlin, Deutschland",
-    "event_3_title": "Solidaritätsmarathon 2025",
-    "event_3_desc": "Laufen Sie für einen guten Zweck! Jeder gelaufene Kilometer trägt direkt zur Finanzierung unserer Bildungsprojekte bei.",
-    "event_3_date": "18. Oktober 2025",
-    "event_3_location": "Frankfurt, Deutschland"
+    "title": "Machen Sie mit"
   },
   "partners": {
     "label": "Partner",

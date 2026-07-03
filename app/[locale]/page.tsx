@@ -1,4 +1,5 @@
-// Page d'accueil localisée
+// /app/[locale]/page.tsx
+
 import { HeroSection } from "@/components/sections/landing/Hero";
 import { AboutSection } from "@/components/sections/landing/About";
 import { ProjectsSection } from "@/components/sections/landing/Projects";

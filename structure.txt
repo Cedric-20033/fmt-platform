@@ -1,0 +1,103 @@
+.
+|-- .dockerignore
+|-- .env.local
+|-- .gitignore
+|-- AGENTS.md
+|-- CLAUDE.md
+|-- Dockerfile
+|-- README.md
+|-- app
+|   |-- [locale]
+|   |   |-- admin
+|   |   |   |-- layout.tsx
+|   |   |   `-- page.tsx
+|   |   |-- layout.tsx
+|   |   `-- page.tsx
+|   |-- error.tsx
+|   |-- favicon.ico
+|   |-- globals.css
+|   |-- layout.tsx
+|   |-- loading.tsx
+|   |-- not-found.tsx
+|   `-- page.tsx
+|-- components
+|   |-- layout
+|   |   |-- footer.tsx
+|   |   |-- language-switcher.tsx
+|   |   `-- navbar.tsx
+|   |-- sections
+|   |   `-- landing
+|   |       |-- About.tsx
+|   |       |-- Contact.tsx
+|   |       |-- Donate.tsx
+|   |       |-- Events.tsx
+|   |       |-- Hero.tsx
+|   |       |-- News.tsx
+|   |       |-- Partners-fmt.tsx
+|   |       `-- Projects.tsx
+|   `-- ui
+|       |-- Badge.tsx
+|       |-- Button.tsx
+|       |-- Card.tsx
+|       |-- MediaGallery.tsx
+|       |-- Separator.tsx
+|       `-- ShowImage.tsx
+|-- docker-compose.yaml
+|-- eslint.config.mjs
+|-- i18n
+|   |-- config.ts
+|   |-- navigation.ts
+|   |-- request.ts
+|   `-- routing.ts
+|-- lib
+|   |-- data
+|   |   |-- event.ts
+|   |   `-- static
+|   |       `-- events.data.ts
+|   |-- supabase
+|   |   |-- client.ts
+|   |   `-- server.ts
+|   `-- utils
+|       |-- Cn.ts
+|       `-- date.ts
+|-- messages
+|   |-- de.json
+|   |-- en.json
+|   `-- fr.json
+|-- next-env.d.ts
+|-- next.config.ts
+|-- package-lock.json
+|-- package.json
+|-- postcss.config.mjs
+|-- proxy.ts
+|-- public
+|   |-- file.svg
+|   |-- globe.svg
+|   |-- images
+|   |   |-- events
+|   |   |   `-- mentale-gesundheit-2026
+|   |   |       |-- mentale-gesundheit-2026affiche.jpeg
+|   |   |       `-- programme.jpeg
+|   |   `-- logo.png
+|   |-- next.svg
+|   |-- vercel.svg
+|   `-- window.svg
+|-- structure.txt
+|-- tests
+|   |-- components
+|   |-- hooks
+|   |-- pages
+|   |-- setup.ts
+|   |-- ui
+|   |   |-- badge.test.tsx
+|   |   |-- button.test.tsx
+|   |   `-- card.test.tsx
+|   `-- utils
+|       `-- cn.test.ts
+|-- tsconfig.json
+|-- types
+|   |-- entities.ts
+|   `-- rbac.ts
+`-- vitest.config.ts
+
+26 directories, 74 files
