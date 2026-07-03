@@ -1,25 +1,25 @@
 // components/ui/ShowImage.tsx
 import Image from "next/image";
-import { CldImage, CldVideoPlayer } from "next-cloudinary";
-import "next-cloudinary/dist/cld-video-player.css";
+import { CloudinaryMedia } from "@/components/ui/CloudinaryMedia";
 import { resolveMediaUrl } from "@/lib/utils/media";
 import type { MediaAsset } from "@/types/entities";
 
 interface ShowImageProps {
-  // --- Mode "legacy" : chemin brut (logo, image locale statique) ---
+  //=== LEGACY MODE (inchangé) ===
   src?: string;
   width?: number;
   height?: number;
   size?: number;
 
-  // --- Mode "media" : MediaAsset (Cloudinary ou futur prestataire) ---
+  //=== NOUVEAU MODE MEDIA ===
   media?: MediaAsset;
-  aspectRatio?: string; // ex: "16 / 9" — sinon dérivé de media.width/height
+  aspectRatio?: string;
   sizes?: string;
   priority?: boolean;
 
-  // --- Commun aux deux modes ---
-  fill?: boolean; // true = le parent gère déjà position:relative + dimensions
+  //=== OPTIONS pour les deux modes ===
+
+  fill?: boolean;
   alt?: string;
   className?: string;
 }
@@ -40,57 +40,32 @@ export function ShowImage({
   // ===================== MODE MEDIA =====================
   if (media) {
     const resolvedAlt = alt || media.alt;
+    const mediaWithAlt = { ...media, alt: resolvedAlt };
 
-    if (media.type === "video") {
-      const videoEl =
-        media.provider === "cloudinary" ? (
-          <CldVideoPlayer src={media.storage_ref} width={media.width ?? 1280} height={media.height ?? 720} />
-        ) : (
-          <video src={resolveMediaUrl(media)} controls className="w-full h-full object-cover" />
-        );
-
-      if (fill) return <div className={`absolute inset-0 ${className}`}>{videoEl}</div>;
-
-      const ratio = aspectRatio ?? (media.width && media.height ? `${media.width} / ${media.height}` : "16 / 9");
+    if (media.provider === "cloudinary") {
+      if (fill) {
+        return <CloudinaryMedia media={mediaWithAlt} sizes={sizes} priority={priority} className={className} />;
+      }
+      const ratio =
+        aspectRatio ??
+        (media.width && media.height ? `${media.width} / ${media.height}` : media.type === "video" ? "16 / 9" : "4 / 3");
       return (
-        <div className={`relative w-full ${className}`} style={{ aspectRatio: ratio }}>
-          {videoEl}
+        <div className={`relative w-full overflow-hidden ${className}`} style={{ aspectRatio: ratio }}>
+          <CloudinaryMedia media={mediaWithAlt} sizes={sizes} priority={priority} />
         </div>
       );
     }
 
-    // Image
-    const imageEl =
-      media.provider === "cloudinary" ? (
-        <CldImage
-          src={media.storage_ref}
-          alt={resolvedAlt}
-          fill
-          crop="fill"
-          gravity="auto"
-          format="auto"
-          quality="auto"
-          sizes={sizes ?? "(max-width: 768px) 50vw, 33vw"}
-          priority={priority}
-          className="object-cover"
-        />
-      ) : (
-        <Image
-          src={resolveMediaUrl(media)}
-          alt={resolvedAlt}
-          fill
-          sizes={sizes ?? "(max-width: 768px) 50vw, 33vw"}
-          className="object-cover"
-          priority={priority}
-        />
+    // Prestataire non-Cloudinary : next/image classique, pas de frontière client nécessaire
+    if (fill) {
+      return (
+        <Image src={resolveMediaUrl(media)} alt={resolvedAlt} fill sizes={sizes ?? "100%"} className={className} priority={priority} />
       );
-
-    if (fill) return <>{imageEl}</>;
-
-    const ratio = aspectRatio ?? (media.width && media.height ? `${media.width} / ${media.height}` : "4 / 3");
+    }
+    const ratio = aspectRatio ?? "4 / 3";
     return (
       <div className={`relative w-full overflow-hidden ${className}`} style={{ aspectRatio: ratio }}>
-        {imageEl}
+        <Image src={resolveMediaUrl(media)} alt={resolvedAlt} fill sizes={sizes ?? "100%"} className="object-cover" priority={priority} />
       </div>
     );
   }
@@ -104,12 +79,6 @@ export function ShowImage({
   }
 
   return (
-    <Image
-      src={src ?? "/Images/logo.png"}
-      width={imageWidth}
-      height={imageHeight}
-      alt={alt || "Image"}
-      className={className}
-    />
+    <Image src={src ?? "/Images/logo.png"} width={imageWidth} height={imageHeight} alt={alt || "Image"} className={className} />
   );
 }

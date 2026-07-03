@@ -108,5 +108,9 @@
     "privacy": "Politique de confidentialité",
     "legal_notice": "Mentions légales",
     "contact": "Contact"
-  }
+  },
+  "gallery": {
+  "label": "Sur le terrain",
+  "title": "Nos actions en images"
+}
 }
