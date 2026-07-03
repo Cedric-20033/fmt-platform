@@ -141,13 +141,17 @@ async function withRetry(fn, { attempts = 3, delayMs = 2000, label = "" } = {}) 
 // ---------------------------------------------------------------------
 
 async function uploadToCloudinary(filePath, type) {
-  const folder = `fmt/gallery`;
+  // Pas de paramètre "folder" volontairement : sur un compte avec Dynamic Folders
+  // activé, le comportement de préfixage du public_id n'est pas garanti (voir
+  // l'incident où un public_id supposé préfixé s'est révélé plat à l'usage).
+  // On stocke donc à plat, et on utilise des tags pour rester organisé dans
+  // Cloudinary sans jamais toucher au public_id réel.
   const options = {
-    folder,
     resource_type: type, // "image" ou "video" — explicite, pas de "auto" pour rester prévisible
     use_filename: true,
     unique_filename: true,
     overwrite: false,
+    tags: ["site-gallery"],
   };
 
   if (type === "video") {
@@ -238,6 +242,13 @@ async function main() {
       console.log(
         `${progress} ✓ Cloudinary OK — public_id=${uploadResult.public_id} ${uploadResult.width}x${uploadResult.height} (${uploadResult.format})`
       );
+
+      if (uploadResult.public_id.includes("/")) {
+        console.warn(
+          `${progress} ⚠ ATTENTION : ce public_id contient un "/" alors qu'aucun dossier n'a été demandé. ` +
+            `Vérifiez manuellement que l'image s'affiche bien sur le site avant de faire confiance au reste du lot.`
+        );
+      }
 
       const altText = basename(filePath, extname(filePath)).replace(/[_-]+/g, " ").trim();
 
