@@ -1,5 +1,6 @@
 import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/Badge";
+import { Typewriter } from "@/components/animations/TypeWriter";
 
 const PARTNERS = [
   { name: "Deutsches Rotes Kreuz", abbr: "DRK" },
@@ -21,9 +22,9 @@ export function PartnersSection() {
             {t("label")}
           </Badge>
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            {t("title")}
+            <Typewriter text={t("title")}  speed={50} />
           </h2>
-          <p className="text-gray-500 max-w-xl mx-auto">{t("description")}</p>
+          <p className="text-gray-500 max-w-xl mx-auto"><Typewriter text={t("description")}  speed={60} delay={0.8} /></p>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">

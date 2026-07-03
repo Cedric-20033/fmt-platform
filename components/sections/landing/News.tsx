@@ -10,14 +10,14 @@ import {
   CardDescription,
   CardFooter,
 } from "@/components/ui/Card";
+import { Reveal } from "@/components/animations/Reveal";
+import { Typewriter } from "@/components/animations/TypeWriter";
 
 const NEWS_ITEMS = ["news_1", "news_2", "news_3"] as const;
 type NewsItemKey = (typeof NEWS_ITEMS)[number];
 type NewsTranslationSuffix = "date" | "title" | "excerpt";
-const newsTranslationKey = (
-  key: NewsItemKey,
-  suffix: NewsTranslationSuffix,
-) => `${key}_${suffix}` as const;
+const newsTranslationKey = (key: NewsItemKey, suffix: NewsTranslationSuffix) =>
+  `${key}_${suffix}` as const;
 
 export function NewsSection() {
   const t = useTranslations("news");
@@ -32,7 +32,7 @@ export function NewsSection() {
               {t("label")}
             </Badge>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-              {t("title")}
+              <Typewriter text={t("title")}  speed={50} />
             </h2>
           </div>
           <Button asChild variant="outline" size="sm" disabled>
@@ -44,31 +44,35 @@ export function NewsSection() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {NEWS_ITEMS.map((key) => (
-            <Card
-              key={key}
-              className="hover:shadow-lg transition-shadow duration-300 flex flex-col"
-            >
-              {/* Bande colorée */}
-              <div className="h-1.5 bg-gradient-to-r from-[#2b8a8a] to-[#f39237] rounded-t-xl" />
-              <CardHeader className="flex-1">
-                <div className="flex items-center gap-2 text-xs text-gray-400 mb-2">
-                  <Calendar size={13} />
-                  <span>{t(newsTranslationKey(key, "date"))}</span>
-                </div>
-                <CardTitle>{t(newsTranslationKey(key, "title"))}</CardTitle>
-                <CardDescription>{t(newsTranslationKey(key, "excerpt"))}</CardDescription>
-              </CardHeader>
-              <CardFooter>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="px-0 text-[#2b8a8a] hover:px-2"
-                  disabled
-                >
-                  {t("read_more")} <ArrowRight size={14} />
-                </Button>
-              </CardFooter>
-            </Card>
+            <Reveal from="up" delay={0.1} key={key}>
+              <Card
+                key={key}
+                className="hover:shadow-lg transition-shadow duration-300 flex flex-col"
+              >
+                {/* Bande colorée */}
+                <div className="h-1.5 bg-gradient-to-r from-[#2b8a8a] to-[#f39237] rounded-t-xl" />
+                <CardHeader className="flex-1">
+                  <div className="flex items-center gap-2 text-xs text-gray-400 mb-2">
+                    <Calendar size={13} />
+                    <span>{t(newsTranslationKey(key, "date"))}</span>
+                  </div>
+                  <CardTitle>{t(newsTranslationKey(key, "title"))}</CardTitle>
+                  <CardDescription>
+                    {t(newsTranslationKey(key, "excerpt"))}
+                  </CardDescription>
+                </CardHeader>
+                <CardFooter>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="px-0 text-[#2b8a8a] hover:px-2"
+                    disabled
+                  >
+                    {t("read_more")} <ArrowRight size={14} />
+                  </Button>
+                </CardFooter>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </div>

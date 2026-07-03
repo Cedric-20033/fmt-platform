@@ -3,6 +3,7 @@ import { useTranslations, useLocale } from "next-intl";
 import { ArrowRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
+import { Reveal } from "@/components/animations/Reveal";
 
 const STATS = [
   { key: "stat_projects", value: "12" },
@@ -43,43 +44,44 @@ export function HeroSection() {
             {t("badge")}
           </Badge>
 
-          {/* Titre principal */}
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
-            <span className="text-[#2b8a8a]">Prévention</span>
-            {" · "}
-            <span className="text-[#f39237]">Éducation</span>
-            {" · "}
-            <span className="text-[#2b8a8a]">Intégration</span>
-          </h1>
-
-          <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-2xl">
-            {t("subheadline")}
-          </p>
-
-          {/* Appels à l'action */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Button asChild size="lg">
-              <Link href={`/${locale}#projects`}>
-                {t("cta_primary")}
-                <ArrowRight size={18} />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline">
-              <Link href={`/${locale}#donate`}>{t("cta_secondary")}</Link>
-            </Button>
-          </div>
+          <Reveal from="up" delay={0.1}>
+            {/* Titre principal */}
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-6">
+              <span className="text-[#2b8a8a]">Prévention</span>
+              {" · "}
+              <span className="text-[#f39237]">Éducation</span>
+              {" · "}
+              <span className="text-[#2b8a8a]">Intégration</span>
+            </h1>
+          
+            <p className="text-lg text-gray-600 leading-relaxed mb-10 max-w-2xl">
+              {t("subheadline")}
+            </p>
+          
+            {/* Appels à l'action */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button asChild size="lg">
+                <Link href={`/${locale}#projects`}>
+                  {t("cta_primary")}
+                  <ArrowRight size={18} />
+                </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline">
+                <Link href={`/${locale}#donate`}>{t("cta_secondary")}</Link>
+              </Button>
+            </div>
+          </Reveal>
         </div>
 
         {/* Statistiques */}
         <div className="mt-20 grid grid-cols-2 sm:grid-cols-4 gap-6">
-          {STATS.map(({ key, value }) => (
-            <div
-              key={key}
-              className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-white shadow-sm text-center"
-            >
-              <p className="text-3xl font-bold text-[#2b8a8a]">{value}</p>
-              <p className="text-sm text-gray-500 mt-1">{t(key)}</p>
-            </div>
+          {STATS.map(({ key, value }, index) => (
+            <Reveal key={key} from="up" delay={index * 0.15}>
+              <div className="bg-white/70 backdrop-blur-sm rounded-xl p-6 border border-white shadow-sm text-center">
+                <p className="text-3xl font-bold text-[#2b8a8a]">{value}</p>
+                <p className="text-sm text-gray-500 mt-1">{t(key)}</p>
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>
