@@ -72,7 +72,7 @@ export interface Event {
   schedule: EventScheduleItem[];
   contacts: EventContact[];
   partners: EventPartner[];
-  media: EventMedia[];
+  media: MediaAsset[];
 
   created_at: string;
   updated_at: string;
@@ -102,16 +102,20 @@ export interface AuditLog {
   created_at: string;
 }
 
+export type MediaProvider = "cloudinary" | "s3" | "other";
+
 export interface MediaAsset {
   id: string;
-  event_id: string; // FK vers Event.id (ou slug)
   type: "image" | "video";
-  url: string; // chemin local, YouTube, ou Supabase Storage
-  alt: string; // texte alternatif (accessibilité)
-  caption: string | null;
-  is_cover: boolean; // sert d'image de couverture pour la card
+  provider: MediaProvider;
+  storage_ref: string;   // identifiant chez le prestataire (public_id Cloudinary, clé S3...)
+  alt: string;
+  caption?: string | null;
+  is_cover: boolean;
   order: number;
-  created_at: string;
+  width: number | null;
+  height: number | null;
+  duration_seconds: number | null;
 }
 
 export interface EventDateSlot {
@@ -139,14 +143,5 @@ export interface EventContact {
 
 export interface EventPartner {
   name: string;
-  logo_url: string | null;
-}
-
-export interface EventMedia {
-  id: string;
-  type: "image" | "video";
-  url: string;
-  alt: string;
-  is_cover: boolean;
-  order: number;
+  logo: MediaAsset | null; // pas de vocabulaire Cloudinary ici — juste une référence générique
 }

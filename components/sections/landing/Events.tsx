@@ -1,4 +1,3 @@
-import { ShowImage } from "@/components/ui/ShowImage";
 import { getTranslations, getLocale } from "next-intl/server";
 import {
   CalendarDays,
@@ -11,6 +10,8 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Card, CardContent } from "@/components/ui/Card";
+import { ShowImage } from "@/components/ui/ShowImage";
+import { MediaGallery } from "@/components/ui/MediaGallery";
 import { getEvents } from "@/lib/data/event";
 import { formatEventDateRange } from "@/lib/utils/date";
 import type { Locale } from "@/i18n/config";
@@ -19,7 +20,7 @@ import type { Event } from "@/types/entities";
 function EventCard({ event, locale }: { event: Event; locale: string }) {
   const { dayLabel, timeLabel } = formatEventDateRange(event.dates, locale);
   const cover = event.media.find((m) => m.is_cover) ?? event.media[0];
-  //const gallery = event.media.filter((m) => !m.is_cover);
+  const gallery = event.media.filter((m) => m.id !== cover?.id);
 
   return (
     <Card className="overflow-hidden border-none shadow-sm ring-1 ring-black/5">
@@ -30,11 +31,10 @@ function EventCard({ event, locale }: { event: Event; locale: string }) {
             {cover && (
               <div className="relative aspect-[3/4] lg:aspect-auto lg:h-full min-h-[320px]">
                 <ShowImage
-                  src={cover.url}
-                  alt={cover.alt}
+                  media={cover}
                   fill
-                  className="object-cover"
-                  
+                  sizes="(max-width: 1024px) 100vw, 340px"
+                  priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0f2a2a] via-[#0f2a2a]/10 to-transparent" />
               </div>
@@ -48,10 +48,7 @@ function EventCard({ event, locale }: { event: Event; locale: string }) {
                 </Badge>
               )}
               <div className="flex items-start gap-2 text-sm">
-                <CalendarDays
-                  size={16}
-                  className="mt-0.5 shrink-0 text-[#6fd6d6]"
-                />
+                <CalendarDays size={16} className="mt-0.5 shrink-0 text-[#6fd6d6]" />
                 <span className="capitalize">{dayLabel}</span>
               </div>
               <div className="flex items-start gap-2 text-sm">
@@ -60,10 +57,7 @@ function EventCard({ event, locale }: { event: Event; locale: string }) {
               </div>
               {event.location_name && (
                 <div className="flex items-start gap-2 text-sm">
-                  <MapPin
-                    size={16}
-                    className="mt-0.5 shrink-0 text-[#6fd6d6]"
-                  />
+                  <MapPin size={16} className="mt-0.5 shrink-0 text-[#6fd6d6]" />
                   <span>
                     {event.location_name}
                     {event.location_address && (
@@ -88,9 +82,7 @@ function EventCard({ event, locale }: { event: Event; locale: string }) {
               <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
                 {event.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">
-                {event.description}
-              </p>
+              <p className="text-gray-600 leading-relaxed">{event.description}</p>
             </div>
 
             {/* Programme — timeline */}
@@ -108,13 +100,9 @@ function EventCard({ event, locale }: { event: Event; locale: string }) {
                         <p className="text-xs font-bold text-[#f39237] uppercase tracking-wide mb-1">
                           {item.part_label} · {item.time_range}
                         </p>
-                        <p className="font-semibold text-gray-900">
-                          {item.title}
-                        </p>
+                        <p className="font-semibold text-gray-900">{item.title}</p>
                         {item.description && (
-                          <p className="text-sm text-gray-500 mt-0.5">
-                            {item.description}
-                          </p>
+                          <p className="text-sm text-gray-500 mt-0.5">{item.description}</p>
                         )}
                       </li>
                     ))}
@@ -122,25 +110,8 @@ function EventCard({ event, locale }: { event: Event; locale: string }) {
               </div>
             )}
 
-            {/* Visuel secondaire (affiche programme) }
-            {gallery.length > 0 && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                {gallery.map((item) => (
-                  <div
-                    key={item.id}
-                    className="relative aspect-[3/4] rounded-lg overflow-hidden ring-1 ring-black/5"
-                  >
-                    <ShowImage
-                      src={item.url}
-                      alt={item.alt}
-                      fill
-                      
-                      className="object-cover"
-                    />
-                  </div>
-                ))}
-              </div>
-            )*/}
+            {/* Visuel secondaire (affiche programme, etc.) */}
+            <MediaGallery media={gallery} />
 
             {/* Partenaires + contacts */}
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6 pt-6 border-t border-gray-100">
@@ -152,11 +123,7 @@ function EventCard({ event, locale }: { event: Event; locale: string }) {
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {event.partners.map((p) => (
-                      <Badge
-                        key={p.name}
-                        variant="outline"
-                        className="font-normal"
-                      >
+                      <Badge key={p.name} variant="outline" className="font-normal">
                         {p.name}
                       </Badge>
                     ))}
@@ -169,18 +136,10 @@ function EventCard({ event, locale }: { event: Event; locale: string }) {
                   {event.contacts.map((c) => (
                     <a
                       key={c.value}
-                      href={
-                        c.type === "email"
-                          ? `mailto:${c.value}`
-                          : `tel:${c.value.replace(/\s/g, "")}`
-                      }
+                      href={c.type === "email" ? `mailto:${c.value}` : `tel:${c.value.replace(/\s/g, "")}`}
                       className="flex items-center gap-1.5 text-sm text-gray-600 hover:text-[#2b8a8a] transition-colors"
                     >
-                      {c.type === "email" ? (
-                        <Mail size={14} />
-                      ) : (
-                        <Phone size={14} />
-                      )}
+                      {c.type === "email" ? <Mail size={14} /> : <Phone size={14} />}
                       {c.value}
                     </a>
                   ))}
@@ -208,9 +167,7 @@ export async function EventsSection() {
           <Badge variant="default" className="mb-4">
             {t("label")}
           </Badge>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-            {t("title")}
-          </h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">{t("title")}</h2>
         </div>
 
         <div className="flex flex-col gap-10">

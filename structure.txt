@@ -1,8 +1,10 @@
 .
+|-- .dockerignore
 |-- .env.local
 |-- .gitignore
 |-- AGENTS.md
 |-- CLAUDE.md
+|-- Dockerfile
 |-- README.md
 |-- app
 |   |-- [locale]
@@ -40,6 +42,7 @@
 |       |-- MediaGallery.tsx
 |       |-- Separator.tsx
 |       `-- ShowImage.tsx
+|-- docker-compose.yaml
 |-- eslint.config.mjs
 |-- i18n
 |   |-- config.ts
@@ -67,6 +70,18 @@
 |-- package.json
 |-- postcss.config.mjs
 |-- proxy.ts
+|-- public
+|   |-- file.svg
+|   |-- globe.svg
+|   |-- images
+|   |   |-- events
+|   |   |   `-- mentale-gesundheit-2026
+|   |   |       |-- mentale-gesundheit-2026affiche.jpeg
+|   |   |       `-- programme.jpeg
+|   |   `-- logo.png
+|   |-- next.svg
+|   |-- vercel.svg
+|   `-- window.svg
 |-- structure.txt
 |-- tests
 |   |-- components
@@ -85,4 +100,4 @@
 |   `-- rbac.ts
 `-- vitest.config.ts
 
-22 directories, 63 files
+26 directories, 74 files
