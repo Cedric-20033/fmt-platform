@@ -145,3 +145,17 @@ export interface EventPartner {
   name: string;
   logo: MediaAsset | null; // pas de vocabulaire Cloudinary ici — juste une référence générique
 }
+
+
+export interface GalleryMediaItem {
+  id: string;
+  type: "image" | "video";
+  provider: MediaProvider;
+  storage_ref: string;
+  alt: string;
+  caption: string | null;
+  width: number | null;
+  height: number | null;
+  duration_seconds: number | null;
+  created_at: string; // date d'upload — sert au tri
+}

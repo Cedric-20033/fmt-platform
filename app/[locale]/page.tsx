@@ -8,6 +8,7 @@ import { EventsSection } from "@/components/sections/landing/Events";
 import { PartnersSection } from "@/components/sections/landing/Partners-fmt";
 import { DonateSection } from "@/components/sections/landing/Donate";
 import { ContactSection } from "@/components/sections/landing/Contact";
+import { FieldGallerySection } from "@/components/sections/landing/FieldGallery";
 
 export default function HomePage() {
   return (
@@ -20,6 +21,7 @@ export default function HomePage() {
       <PartnersSection />
       <DonateSection />
       <ContactSection />
+      <FieldGallerySection />
     </main>
   );
 }

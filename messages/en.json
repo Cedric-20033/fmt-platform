@@ -108,5 +108,9 @@
     "privacy": "Privacy Policy",
     "legal_notice": "Legal Notice",
     "contact": "Contact"
-  }
+  },
+  "gallery": {
+  "label": "On the ground",
+  "title": "Our actions in images"
+}
 }

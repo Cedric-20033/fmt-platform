@@ -108,5 +108,9 @@
     "privacy": "Datenschutzerklärung",
     "legal_notice": "Impressum",
     "contact": "Kontakt"
-  }
+  },
+  "gallery": {
+  "label": "Im Einsatz",
+  "title": "Unsere Arbeit in Bildern"
+}
 }

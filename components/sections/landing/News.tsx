@@ -11,7 +11,6 @@ import {
   CardFooter,
 } from "@/components/ui/Card";
 import { Reveal } from "@/components/animations/Reveal";
-import { Typewriter } from "@/components/animations/TypeWriter";
 
 const NEWS_ITEMS = ["news_1", "news_2", "news_3"] as const;
 type NewsItemKey = (typeof NEWS_ITEMS)[number];
@@ -32,7 +31,7 @@ export function NewsSection() {
               {t("label")}
             </Badge>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">
-              <Typewriter text={t("title")}  speed={50} />
+              {t("title")}
             </h2>
           </div>
           <Button asChild variant="outline" size="sm" disabled>

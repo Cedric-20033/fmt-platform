@@ -7,7 +7,6 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils/Cn";
 import { Reveal } from "@/components/animations/Reveal";
-import { Typewriter } from "@/components/animations/TypeWriter";
 
 const PRESET_KEYS = ["amount_1", "amount_2", "amount_3"] as const;
 
@@ -32,7 +31,7 @@ export function DonateSection() {
                 {t("label")}
               </Badge>
               <h2 className="text-3xl sm:text-4xl font-bold mb-6 leading-tight">
-                <Typewriter text={t("title")}  speed={50} />
+                {t("title")}
               </h2>
               <p className="text-teal-100 leading-relaxed text-lg mb-8">
                 {t("description")}

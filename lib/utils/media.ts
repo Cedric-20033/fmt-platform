@@ -1,5 +1,6 @@
 // lib/utils/media.ts
 import type { MediaAsset } from "@/types/entities";
+import type {GalleryMediaItem} from "@/types/entities";
 
 interface ResolveOptions {
   width?: number;
@@ -30,4 +31,13 @@ export function resolveMediaUrl(asset: Pick<MediaAsset, "provider" | "storage_re
     default:
       return asset.storage_ref;
   }
+}
+
+// à ajouter dans lib/utils/media.ts
+export function resolveVideoPosterUrl(asset: Pick<GalleryMediaItem, "provider" | "storage_ref">, width = 480): string {
+  if (asset.provider === "cloudinary") {
+    const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+    return `https://res.cloudinary.com/${cloudName}/video/upload/so_0,f_jpg,q_auto,w_${width}/${asset.storage_ref}.jpg`;
+  }
+  return "";
 }
