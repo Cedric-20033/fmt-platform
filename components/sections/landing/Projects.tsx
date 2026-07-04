@@ -63,7 +63,7 @@ export function ProjectsSection() {
               {t("label")}
             </Badge>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 leading-tight">
-              <Typewriter text={t("title")}  speed={50} />
+              {t("title")}
             </h2>
             <p className="text-gray-500 mt-3 max-w-xl">{t("description")}</p>
           </div>

@@ -2,7 +2,6 @@ import { useTranslations } from "next-intl";
 import { Shield, BookOpen, Users } from "lucide-react";
 import { Badge } from "@/components/ui/Badge";
 import { Reveal } from "@/components/animations/Reveal";
-import { Typewriter } from "@/components/animations/TypeWriter";
 
 const VALUES = [
   { key: "value_1", icon: Shield, color: "text-[#2b8a8a]", bg: "bg-[#e6f4f4]" },
@@ -28,7 +27,7 @@ export function AboutSection() {
               {t("label")}
             </Badge>
             <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6 leading-tight">
-               <Typewriter text={t("title")}  speed={50} />
+              {t("title")}
             </h2>
             <p className="text-gray-600 leading-relaxed text-lg">
               {t("description")}
