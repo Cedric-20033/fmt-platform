@@ -2,7 +2,7 @@
 
 Documentation de référence pour la base de données du site. Ce document explique **le rôle de chaque table**, **ses colonnes importantes**, et **ses relations** avec le reste du schéma.
 
-Migrations correspondantes : `0001_init_schema.sql` → `0005_gallery_media_schema.sql`.
+Migrations correspondantes : `0001_init_schema.sql` → `0006_past_events_schema.sql`.
 
 ---
 
@@ -99,7 +99,7 @@ Titre, description, objectifs, une ligne par langue. → `projects` via `project
 
 ## 6. `media` — médias attachés à un contenu existant
 
-Table **polymorphe** : une seule table pour tous les visuels attachés à un event, un article, un projet ou un profil, distingués par `owner_type` (`'event' | 'news' | 'project' | 'profile'`) + `owner_id`.
+Table **polymorphe** : une seule table pour tous les visuels attachés à un event, un article, un projet, un profil, ou (depuis 0006) un événement passé, distingués par `owner_type` (`'event' | 'news' | 'project' | 'profile' | 'past_event'`) + `owner_id`.
 
 | Colonne | Rôle |
 |---|---|
@@ -120,10 +120,30 @@ Table **volontairement séparée** de `media` : contrairement aux visuels ci-des
 
 | Colonne | Rôle |
 |---|---|
-| `related_event_id`, `related_project_id` | Nullables — permettront un filtrage optionnel plus tard, sans contrainte aujourd'hui |
+| `related_event_id`, `related_project_id`, `related_past_event_id` | Nullables — permettent de rattacher un lot de médias à un événement/projet/événement passé précis |
 | `created_at` | Sert directement de critère de tri à l'affichage (pas de colonne `order` nécessaire) |
 
 Pas de table `_translations` associée : `alt`/`caption` restent en une seule langue pour l'instant (contenu descriptif, pas éditorial).
+
+---
+
+## 7bis. Cluster "Événements passés" (migration 0006) — INDÉPENDANT du cluster Événements
+
+**Principe fondamental** : un event annoncé (`events`) n'est **jamais** transformé automatiquement en "passé", quelle que soit sa date. Il reste affiché dans la section Événements tant que `is_published = true`. Le récapitulatif d'un événement terminé (photos, vidéos, retour) est un **contenu à part entière**, ajouté manuellement, qui vit dans sa propre section en bas de page.
+
+### `past_events`
+Slug, `occurred_on` (date représentative, sert au tri du plus récent au plus ancien), `is_published`, `created_by`. Aucun texte ici.
+
+### `past_event_translations`
+`title`, `description`, `location_name` par langue — même pattern que `event_translations`. → `past_events` via `past_event_id`, `on delete cascade`.
+
+### Photo d'entête de la card
+Réutilise `media` (owner_type='past_event', owner_id=past_events.id, is_cover=true) — pas une nouvelle table, comme demandé explicitement pour rester cohérent avec le reste du schéma. Upload via `scripts/upload-gallery.mjs --cover-for=<slug>`.
+
+### Galerie photo/vidéo (bouton "Voir la galerie")
+Réutilise `gallery_media` (colonne `related_past_event_id`, nullable, `on delete set null`). Le composant `GalleryModal` (scroll infini) est le même que celui de la section "Sur le terrain" générale, simplement filtré par cette colonne. Upload via `scripts/upload-gallery.mjs --past-event=<slug>`.
+
+**Card affichée** (`PastEventCard.tsx`) : entête = photo `media`, corps = titre + description + lieu (`past_event_translations`), pied de page = uniquement le bouton d'ouverture de la galerie.
 
 ---
 
@@ -167,6 +187,10 @@ erDiagram
 
     events ||--o{ gallery_media : "related_event_id (optionnel)"
     projects ||--o{ gallery_media : "related_project_id (optionnel)"
+    past_events ||--o{ gallery_media : "related_past_event_id (optionnel)"
+    past_events ||--o{ past_event_translations : "traductions"
+    profiles ||--o{ past_events : "created_by"
+    media ||--o{ past_events : "couverture (owner_type='past_event')"
 ```
 
 *Note : `media.owner_id` (relation vers events/news_articles/projects/profiles) n'apparaît pas ici car ce n'est pas une clé étrangère réelle — voir la limite décrite section 6.*

@@ -18,7 +18,7 @@ interface RawMediaRow {
 }
 
 export async function getMediaForOwners(
-  ownerType: "event" | "news" | "project" | "gallery_album" | "profile",
+  ownerType: "event" | "news" | "project" | "gallery_album" | "profile" | "past_event",
   ownerIds: string[]
 ): Promise<Map<string, MediaAsset[]>> {
   const map = new Map<string, MediaAsset[]>();
