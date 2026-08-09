@@ -67,6 +67,13 @@
     "label": "Veranstaltungen",
     "title": "Machen Sie mit"
   },
+  "pastEvents": {
+    "label": "Rückblick",
+    "title": "Vergangene Veranstaltungen",
+    "view_more": "Mehr sehen",
+    "gallery_section_title": "Fotos & Videos",
+    "gallery_empty": "Noch keine Fotos oder Videos."
+  },
   "partners": {
     "label": "Partner",
     "title": "Organisationen, die uns vertrauen",

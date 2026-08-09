@@ -4,21 +4,25 @@
 import { useEffect, useRef, useState, useTransition } from "react";
 import { X } from "lucide-react";
 import { GalleryCell } from "@/components/gallery/GalleryCell";
-import { loadMoreGalleryMedia } from "@/lib/actions/gallery";
+import { loadMoreGalleryMedia, loadMorePastEventGalleryMedia } from "@/lib/actions/gallery";
 import type { GalleryMediaItem } from "@/types/entities";
 
 export function GalleryModal({
   initialItems,
   initialHasMore,
   onClose,
+  pastEventId,
+  initialPage = 1, // la page 0 est déjà chargée (initialItems) — 0 si on ouvre sans préchargement
 }: {
   initialItems: GalleryMediaItem[];
   initialHasMore: boolean;
   onClose: () => void;
+  pastEventId?: string; // si fourni, la galerie est scopée à cet événement passé (au lieu du flux terrain global)
+  initialPage?: number;
 }) {
   const [items, setItems] = useState(initialItems);
   const [hasMore, setHasMore] = useState(initialHasMore);
-  const [page, setPage] = useState(1); // la page 0 est déjà chargée (initialItems)
+  const [page, setPage] = useState(initialPage); // la page 0 est déjà chargée (initialItems) si initialPage=1
   const [isPending, startTransition] = useTransition();
   const sentinelRef = useRef<HTMLDivElement>(null);
 
@@ -47,7 +51,9 @@ export function GalleryModal({
       (entries) => {
         if (entries[0].isIntersecting && !isPending) {
           startTransition(async () => {
-            const { items: nextItems, hasMore: nextHasMore } = await loadMoreGalleryMedia(page);
+            const { items: nextItems, hasMore: nextHasMore } = pastEventId
+              ? await loadMorePastEventGalleryMedia(pastEventId, page)
+              : await loadMoreGalleryMedia(page);
             setItems((prev) => [...prev, ...nextItems]);
             setHasMore(nextHasMore);
             setPage((p) => p + 1);
@@ -84,6 +90,12 @@ export function GalleryModal({
           <div ref={sentinelRef} className="flex justify-center py-10">
             <span className="text-white/50 text-sm">Chargement…</span>
           </div>
+        )}
+
+        {!hasMore && items.length === 0 && (
+          <p className="text-center text-white/50 text-sm py-16">
+            Aucune photo ou vidéo pour le moment.
+          </p>
         )}
       </div>
     </div>

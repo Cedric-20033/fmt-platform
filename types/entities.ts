@@ -159,3 +159,24 @@ export interface GalleryMediaItem {
   duration_seconds: number | null;
   created_at: string; // date d'upload — sert au tri
 }
+
+/**
+ * Événement passé — cluster totalement indépendant de `Event`. Un event
+ * annoncé ne devient jamais un PastEvent automatiquement : celui-ci est
+ * un contenu distinct, ajouté manuellement une fois l'événement terminé.
+ */
+export interface PastEvent {
+  id: string;
+  slug: string;
+  locale: "fr" | "en" | "de";
+  occurred_on: string; // ISO date, sert au tri (plus récent → plus ancien)
+
+  title: string;
+  description: string;
+  location_name: string | null;
+
+  cover: MediaAsset | null; // owner_type='past_event' dans la table media
+
+  created_at: string;
+  updated_at: string;
+}

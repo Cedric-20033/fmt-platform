@@ -25,3 +25,12 @@ export function formatEventDateRange(
     timeLabel: dates.map((d) => `${d.label ?? ""} ${d.start_time}–${d.end_time}`).join(" · "),
   };
 }
+
+// Date simple (ex: occurred_on d'un PastEvent), sans plage horaire.
+export function formatSimpleDate(dateStr: string, locale: string): string {
+  return new Intl.DateTimeFormat(locale, {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(dateStr));
+}

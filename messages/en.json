@@ -67,6 +67,13 @@
     "label": "Events",
     "title": "Join us"
   },
+  "pastEvents": {
+    "label": "Retrospective",
+    "title": "Past events",
+    "view_more": "View more",
+    "gallery_section_title": "Photos & videos",
+    "gallery_empty": "No photos or videos yet."
+  },
   "partners": {
     "label": "Partners",
     "title": "Organizations that trust us",

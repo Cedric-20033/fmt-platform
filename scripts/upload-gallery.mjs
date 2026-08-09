@@ -7,6 +7,16 @@
 //   node --env-file=.env.local scripts/upload-gallery.mjs
 //   node --env-file=.env.local scripts/upload-gallery.mjs "/chemin/personnalise"
 //
+// LIER DES PHOTOS/VIDÉOS À LA GALERIE D'UN ÉVÉNEMENT PASSÉ (bouton "Voir
+// la galerie" sur sa card) :
+//   node --env-file=.env.local scripts/upload-gallery.mjs "/chemin" --past-event=mentale-gesundheit-2026
+// (le slug doit exister dans la table past_events, exécutez d'abord la
+// migration 0006 et créez la ligne past_events correspondante)
+//
+// DÉFINIR LA PHOTO D'ENTÊTE DE LA CARD ÉVÉNEMENT PASSÉ (table media,
+// PAS gallery_media — une seule photo, distincte de la galerie) :
+//   node --env-file=.env.local scripts/upload-gallery.mjs "/chemin/vers/1-seule-photo" --cover-for=mentale-gesundheit-2026
+//
 // Variables requises dans .env.local :
 //   NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME
 //   CLOUDINARY_API_KEY
@@ -31,7 +41,18 @@ import { stdin as input, stdout as output } from "node:process";
 // 0. Configuration
 // ---------------------------------------------------------------------
 
-const SOURCE_DIR = resolve(process.argv[2] || join(homedir(), "Desktop", "upload"));
+const cliArgs = process.argv.slice(2).filter((a) => !a.startsWith("--"));
+const pastEventFlag = process.argv.slice(2).find((a) => a.startsWith("--past-event="));
+const coverForFlag = process.argv.slice(2).find((a) => a.startsWith("--cover-for="));
+const PAST_EVENT_SLUG = pastEventFlag ? pastEventFlag.split("=")[1] : null;
+const COVER_FOR_SLUG = coverForFlag ? coverForFlag.split("=")[1] : null;
+
+if (PAST_EVENT_SLUG && COVER_FOR_SLUG) {
+  console.error("\n✗ --past-event et --cover-for sont mutuellement exclusifs (deux tables cibles différentes). Lancez le script deux fois séparément.\n");
+  process.exit(1);
+}
+
+const SOURCE_DIR = resolve(cliArgs[0] || join(homedir(), "Desktop", "upload"));
 const MANIFEST_PATH = resolve("scripts/.gallery-upload-manifest.json");
 const FAILURES_LOG_PATH = resolve("scripts/upload-failures.log");
 
@@ -161,6 +182,99 @@ async function uploadToCloudinary(filePath, type) {
   return cloudinary.uploader.upload(filePath, options);
 }
 
+// Résout un slug past_events en id, ou quitte proprement si introuvable.
+async function resolvePastEventId(supabase, slug) {
+  const { data, error } = await supabase.from("past_events").select("id, slug").eq("slug", slug).maybeSingle();
+  if (error || !data) {
+    console.error(`\n✗ Aucun événement passé trouvé avec le slug "${slug}". Vérifiez past_events.slug en base (migration 0006 + ligne créée ?).\n`);
+    process.exit(1);
+  }
+  return data.id;
+}
+
+// ---------------------------------------------------------------------
+// 5bis. Mode --cover-for : une SEULE photo, insérée dans `media`
+//       (owner_type='past_event', is_cover=true) — PAS dans gallery_media.
+// ---------------------------------------------------------------------
+
+async function runCoverUpload(supabase, pastEventId, slug) {
+  const allFiles = walkDir(SOURCE_DIR);
+  const candidates = allFiles
+    .map((filePath) => ({ filePath, type: classify(filePath) }))
+    .filter((f) => f.type === "image"); // une couverture est toujours une image
+
+  if (candidates.length === 0) {
+    console.error(`\n✗ Aucune image trouvée dans ${SOURCE_DIR}.\n`);
+    process.exit(1);
+  }
+  if (candidates.length > 1) {
+    console.error(
+      `\n✗ ${candidates.length} images trouvées dans ce dossier, mais --cover-for attend UNE SEULE photo de couverture.\n` +
+        `  Isolez la photo voulue dans un dossier dédié et relancez.\n`
+    );
+    process.exit(1);
+  }
+
+  const { filePath } = candidates[0];
+  const name = basename(filePath);
+
+  const { data: existingCover } = await supabase
+    .from("media")
+    .select("id")
+    .eq("owner_type", "past_event")
+    .eq("owner_id", pastEventId)
+    .eq("is_cover", true)
+    .maybeSingle();
+
+  if (existingCover) {
+    const rl = readline.createInterface({ input, output });
+    const answer = await rl.question(
+      `⚠ Une photo de couverture existe déjà pour "${slug}" (media.id=${existingCover.id}). La remplacer ? (o/n) `
+    );
+    rl.close();
+    if (answer.trim().toLowerCase() !== "o") {
+      console.log("Annulé par l'utilisateur.");
+      return;
+    }
+    await supabase.from("media").delete().eq("id", existingCover.id);
+  }
+
+  console.log(`\nUpload de la couverture "${name}" pour l'événement passé "${slug}"...`);
+
+  const uploadResult = await withRetry(() => uploadToCloudinary(filePath, "image"), { label: "upload Cloudinary" });
+  console.log(`✓ Cloudinary OK — public_id=${uploadResult.public_id} ${uploadResult.width}x${uploadResult.height}`);
+
+  const altText = basename(filePath, extname(filePath)).replace(/[_-]+/g, " ").trim();
+
+  const { data: insertedRow, error: insertError } = await supabase
+    .from("media")
+    .insert({
+      owner_type: "past_event",
+      owner_id: pastEventId,
+      type: "image",
+      provider: "cloudinary",
+      storage_ref: uploadResult.public_id,
+      alt: altText || null,
+      caption: null,
+      is_cover: true,
+      order: 0,
+      width: uploadResult.width ?? null,
+      height: uploadResult.height ?? null,
+      duration_seconds: null,
+    })
+    .select("id")
+    .single();
+
+  if (insertError) {
+    console.error(`\n✗ Uploadé sur Cloudinary mais échec de l'insertion Supabase : ${insertError.message}`);
+    console.error(`  public_id Cloudinary à récupérer manuellement si besoin : ${uploadResult.public_id}\n`);
+    process.exit(1);
+  }
+
+  console.log(`✓ Supabase OK — media.id=${insertedRow.id}\n`);
+  console.log("Terminé.\n");
+}
+
 // ---------------------------------------------------------------------
 // 6. Programme principal
 // ---------------------------------------------------------------------
@@ -179,6 +293,19 @@ async function main() {
     process.env.NEXT_PUBLIC_SUPABASE_URL,
     process.env.SUPABASE_SERVICE_ROLE_KEY // clé service : contourne volontairement le RLS, script de confiance
   );
+
+  // ---- Mode couverture : sort du flux normal, une seule photo, autre table ----
+  if (COVER_FOR_SLUG) {
+    const pastEventId = await resolvePastEventId(supabase, COVER_FOR_SLUG);
+    await runCoverUpload(supabase, pastEventId, COVER_FOR_SLUG);
+    return;
+  }
+
+  let relatedPastEventId = null;
+  if (PAST_EVENT_SLUG) {
+    relatedPastEventId = await resolvePastEventId(supabase, PAST_EVENT_SLUG);
+    console.log(`\nLiaison activée : chaque média sera rattaché à la galerie de l'événement passé "${PAST_EVENT_SLUG}" (id=${relatedPastEventId})`);
+  }
 
   const allFiles = walkDir(SOURCE_DIR);
   const candidates = allFiles
@@ -266,6 +393,7 @@ async function main() {
               height: uploadResult.height ?? null,
               duration_seconds: uploadResult.duration ?? null,
               format: uploadResult.format ?? null,
+              related_past_event_id: relatedPastEventId,
               is_published: true,
             })
             .select("id")
