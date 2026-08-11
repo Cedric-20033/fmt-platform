@@ -1,18 +1,22 @@
 // components/sections/landing/PastEventModal.tsx
 "use client";
 
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useCallback, useEffect } from "react";
 import { X, MapPin, CalendarDays } from "lucide-react";
-import { GalleryCell } from "@/components/gallery/GalleryCell";
+import { TabbedMediaGrid } from "@/components/gallery/TabbedMediaGrid";
+import { useGalleryPagination } from "@/components/gallery/useGalleryPagination";
 import { ShowImage } from "@/components/ui/ShowImage";
 import { loadMorePastEventGalleryMedia } from "@/lib/actions/gallery";
-import type { GalleryMediaItem, PastEvent } from "@/types/entities";
+import type { PastEvent } from "@/types/entities";
 
 interface PastEventModalProps {
   pastEvent: PastEvent;
   dateLabel: string;
   galleryTitle: string;
   emptyGalleryLabel: string;
+  photosLabel: string;
+  videosLabel: string;
+  loadingLabel: string;
   onClose: () => void;
 }
 
@@ -25,13 +29,13 @@ export function PastEventModal({
   dateLabel,
   galleryTitle,
   emptyGalleryLabel,
+  photosLabel,
+  videosLabel,
+  loadingLabel,
   onClose,
 }: PastEventModalProps) {
-  const [items, setItems] = useState<GalleryMediaItem[]>([]);
-  const [hasMore, setHasMore] = useState(true);
-  const [page, setPage] = useState(0);
-  const [isPending, startTransition] = useTransition();
-  const sentinelRef = useRef<HTMLDivElement>(null);
+  const fetcher = useCallback((page: number) => loadMorePastEventGalleryMedia(pastEvent.id, page), [pastEvent.id]);
+  const { items, hasMore, isLoadingMore, loadMore } = useGalleryPagination([], true, fetcher, 0);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -46,38 +50,13 @@ export function PastEventModal({
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
 
-  useEffect(() => {
-    if (!hasMore) return;
-    const el = sentinelRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !isPending) {
-          startTransition(async () => {
-            const { items: nextItems, hasMore: nextHasMore } = await loadMorePastEventGalleryMedia(
-              pastEvent.id,
-              page
-            );
-            setItems((prev) => [...prev, ...nextItems]);
-            setHasMore(nextHasMore);
-            setPage((p) => p + 1);
-          });
-        }
-      },
-      { rootMargin: "600px" }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [hasMore, isPending, page, pastEvent.id]);
-
   return (
     <div className="fixed inset-0 z-50 bg-black/70 overflow-y-auto py-6 px-4">
       <div className="max-w-4xl mx-auto bg-white rounded-2xl overflow-hidden shadow-xl">
         <div className="relative">
           {pastEvent.cover && (
-            <div className="relative aspect-[16/9]">
-              <ShowImage media={pastEvent.cover} fill sizes="(max-width: 896px) 100vw, 896px" />
+            <div className="relative aspect-[16/9] bg-[#0f2a2a]">
+              <ShowImage media={pastEvent.cover} fill fit="contain" sizes="(max-width: 896px) 100vw, 896px" />
             </div>
           )}
           <button
@@ -112,21 +91,17 @@ export function PastEventModal({
         <div className="border-t border-gray-100 p-6 sm:p-8">
           <h3 className="text-lg font-bold text-gray-900 mb-4">{galleryTitle}</h3>
 
-          <div className="columns-2 sm:columns-3 gap-3">
-            {items.map((item) => (
-              <GalleryCell key={item.id} item={item} />
-            ))}
-          </div>
-
-          {hasMore && (
-            <div ref={sentinelRef} className="flex justify-center py-8">
-              <span className="text-gray-400 text-sm">Chargement…</span>
-            </div>
-          )}
-
-          {!hasMore && items.length === 0 && (
-            <p className="text-center text-gray-400 text-sm py-8">{emptyGalleryLabel}</p>
-          )}
+          <TabbedMediaGrid
+            items={items}
+            hasMore={hasMore}
+            isLoadingMore={isLoadingMore}
+            onLoadMore={loadMore}
+            photosLabel={photosLabel}
+            videosLabel={videosLabel}
+            emptyLabel={emptyGalleryLabel}
+            loadingLabel={loadingLabel}
+            columnsClassName="columns-2 sm:columns-3 gap-3"
+          />
         </div>
       </div>
     </div>

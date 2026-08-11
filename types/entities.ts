@@ -147,6 +147,24 @@ export interface EventPartner {
 }
 
 
+/**
+ * Sous-ensemble minimal commun à MediaAsset et GalleryMediaItem, suffisant
+ * pour tout affichage de média (grille, onglets photo/vidéo, lightbox).
+ * Permet aux composants de galerie de rester génériques et réutilisables
+ * partout (terrain, événements annoncés, événements passés) sans dépendre
+ * d'un type précis.
+ */
+export interface DisplayMediaItem {
+  id: string;
+  type: "image" | "video";
+  provider: MediaProvider;
+  storage_ref: string;
+  alt: string;
+  width: number | null;
+  height: number | null;
+  duration_seconds: number | null;
+}
+
 export interface GalleryMediaItem {
   id: string;
   type: "image" | "video";

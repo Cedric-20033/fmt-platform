@@ -14,6 +14,9 @@ interface PastEventCardProps {
   viewMoreLabel: string;
   galleryTitle: string;
   emptyGalleryLabel: string;
+  photosLabel: string;
+  videosLabel: string;
+  loadingLabel: string;
 }
 
 export function PastEventCard({
@@ -21,6 +24,9 @@ export function PastEventCard({
   viewMoreLabel,
   galleryTitle,
   emptyGalleryLabel,
+  photosLabel,
+  videosLabel,
+  loadingLabel,
 }: PastEventCardProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const dateLabel = formatSimpleDate(pastEvent.occurred_on, pastEvent.locale);
@@ -30,8 +36,8 @@ export function PastEventCard({
       <Card className="overflow-hidden flex flex-col h-full">
         {/* Photo de couverture uniquement */}
         {pastEvent.cover && (
-          <div className="relative aspect-[16/10] shrink-0">
-            <ShowImage media={pastEvent.cover} fill sizes="(max-width: 1024px) 100vw, 400px" />
+          <div className="relative aspect-[16/10] shrink-0 bg-[#0f2a2a]">
+            <ShowImage media={pastEvent.cover} fill fit="contain" sizes="(max-width: 1024px) 100vw, 400px" />
           </div>
         )}
 
@@ -60,6 +66,9 @@ export function PastEventCard({
           dateLabel={dateLabel}
           galleryTitle={galleryTitle}
           emptyGalleryLabel={emptyGalleryLabel}
+          photosLabel={photosLabel}
+          videosLabel={videosLabel}
+          loadingLabel={loadingLabel}
           onClose={() => setModalOpen(false)}
         />
       )}

@@ -117,7 +117,14 @@
     "contact": "Contact"
   },
   "gallery": {
-  "label": "Sur le terrain",
-  "title": "Nos actions en images"
-}
+    "label": "Sur le terrain",
+    "title": "Nos actions en images",
+    "view_more": "Voir plus",
+    "empty": "Aucune photo ou vidéo pour le moment.",
+    "loading": "Chargement…",
+    "tabs": {
+      "photos": "Photos",
+      "videos": "Vidéos"
+    }
+  }
 }

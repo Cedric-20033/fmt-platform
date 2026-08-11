@@ -33,6 +33,7 @@ function EventCard({ event, locale }: { event: Event; locale: string }) {
                 <ShowImage
                   media={cover}
                   fill
+                  fit="contain"
                   sizes="(max-width: 1024px) 100vw, 340px"
                   priority
                 />
