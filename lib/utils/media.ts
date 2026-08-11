@@ -41,3 +41,26 @@ export function resolveVideoPosterUrl(asset: Pick<GalleryMediaItem, "provider" |
   }
   return "";
 }
+
+/**
+ * Construit une URL vidéo lisible directement par une balise <video>, pour
+ * les prestataires NON-Cloudinary (Cloudinary passe par CldVideoPlayer, qui
+ * résout lui-même le publicId — voir GalleryCell). storage_ref n'est jamais
+ * une URL en soi (juste un identifiant chez le prestataire), donc il ne faut
+ * jamais le passer tel quel à un <video src>.
+ */
+export function resolveVideoUrl(asset: Pick<GalleryMediaItem, "provider" | "storage_ref">): string {
+  switch (asset.provider) {
+    case "s3": {
+      const baseUrl = process.env.NEXT_PUBLIC_S3_BASE_URL;
+      return `${baseUrl}/${asset.storage_ref}`;
+    }
+    case "cloudinary": {
+      // Fallback défensif si jamais appelé pour du Cloudinary hors CldVideoPlayer.
+      const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+      return `https://res.cloudinary.com/${cloudName}/video/upload/f_auto,q_auto/${asset.storage_ref}`;
+    }
+    default:
+      return asset.storage_ref;
+  }
+}

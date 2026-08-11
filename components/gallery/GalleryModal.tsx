@@ -1,9 +1,11 @@
 // components/gallery/GalleryModal.tsx
 "use client";
 
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useMemo } from "react";
 import { X } from "lucide-react";
-import { GalleryCell } from "@/components/gallery/GalleryCell";
+import { useTranslations } from "next-intl";
+import { TabbedMediaGrid } from "@/components/gallery/TabbedMediaGrid";
+import { useGalleryPagination } from "@/components/gallery/useGalleryPagination";
 import { loadMoreGalleryMedia, loadMorePastEventGalleryMedia } from "@/lib/actions/gallery";
 import type { GalleryMediaItem } from "@/types/entities";
 
@@ -20,11 +22,18 @@ export function GalleryModal({
   pastEventId?: string; // si fourni, la galerie est scopée à cet événement passé (au lieu du flux terrain global)
   initialPage?: number;
 }) {
-  const [items, setItems] = useState(initialItems);
-  const [hasMore, setHasMore] = useState(initialHasMore);
-  const [page, setPage] = useState(initialPage); // la page 0 est déjà chargée (initialItems) si initialPage=1
-  const [isPending, startTransition] = useTransition();
-  const sentinelRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations("gallery");
+
+  const fetcher = useMemo(
+    () => (page: number) => (pastEventId ? loadMorePastEventGalleryMedia(pastEventId, page) : loadMoreGalleryMedia(page)),
+    [pastEventId]
+  );
+  const { items, hasMore, isLoadingMore, loadMore } = useGalleryPagination(
+    initialItems,
+    initialHasMore,
+    fetcher,
+    initialPage
+  );
 
   // Bloque le scroll de la page derrière la modal
   useEffect(() => {
@@ -41,31 +50,6 @@ export function GalleryModal({
     return () => window.removeEventListener("keydown", handler);
   }, [onClose]);
 
-  // Charge la suite quand le repère en bas devient visible
-  useEffect(() => {
-    if (!hasMore) return;
-    const el = sentinelRef.current;
-    if (!el) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !isPending) {
-          startTransition(async () => {
-            const { items: nextItems, hasMore: nextHasMore } = pastEventId
-              ? await loadMorePastEventGalleryMedia(pastEventId, page)
-              : await loadMoreGalleryMedia(page);
-            setItems((prev) => [...prev, ...nextItems]);
-            setHasMore(nextHasMore);
-            setPage((p) => p + 1);
-          });
-        }
-      },
-      { rootMargin: "600px" } // anticipe le chargement avant d'atteindre le bas
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [hasMore, isPending, page]);
-
   return (
     <div className="fixed inset-0 z-50 bg-black/95 overflow-y-auto">
       <div className="sticky top-0 z-10 flex justify-end p-4 bg-gradient-to-b from-black/80 to-transparent">
@@ -80,23 +64,17 @@ export function GalleryModal({
       </div>
 
       <div className="max-w-7xl mx-auto px-4 pb-16">
-        <div className="columns-2 sm:columns-3 lg:columns-4 gap-3">
-          {items.map((item) => (
-            <GalleryCell key={item.id} item={item} />
-          ))}
-        </div>
-
-        {hasMore && (
-          <div ref={sentinelRef} className="flex justify-center py-10">
-            <span className="text-white/50 text-sm">Chargement…</span>
-          </div>
-        )}
-
-        {!hasMore && items.length === 0 && (
-          <p className="text-center text-white/50 text-sm py-16">
-            Aucune photo ou vidéo pour le moment.
-          </p>
-        )}
+        <TabbedMediaGrid
+          items={items}
+          hasMore={hasMore}
+          isLoadingMore={isLoadingMore}
+          onLoadMore={loadMore}
+          photosLabel={t("tabs.photos")}
+          videosLabel={t("tabs.videos")}
+          emptyLabel={t("empty")}
+          loadingLabel={t("loading")}
+          theme="dark"
+        />
       </div>
     </div>
   );

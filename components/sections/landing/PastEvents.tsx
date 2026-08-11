@@ -9,6 +9,7 @@ import type { Locale } from "@/i18n/config";
 // événements annoncés (table `events`), lit uniquement `past_events`.
 export async function PastEventsSection() {
   const t = await getTranslations("pastEvents");
+  const tGallery = await getTranslations("gallery");
   const locale = (await getLocale()) as Locale;
   const pastEvents = await getPastEvents(locale);
 
@@ -32,6 +33,9 @@ export async function PastEventsSection() {
               viewMoreLabel={t("view_more")}
               galleryTitle={t("gallery_section_title")}
               emptyGalleryLabel={t("gallery_empty")}
+              photosLabel={tGallery("tabs.photos")}
+              videosLabel={tGallery("tabs.videos")}
+              loadingLabel={tGallery("loading")}
             />
           ))}
         </div>

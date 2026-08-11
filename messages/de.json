@@ -117,7 +117,14 @@
     "contact": "Kontakt"
   },
   "gallery": {
-  "label": "Im Einsatz",
-  "title": "Unsere Arbeit in Bildern"
-}
+    "label": "Im Einsatz",
+    "title": "Unsere Arbeit in Bildern",
+    "view_more": "Mehr sehen",
+    "empty": "Noch keine Fotos oder Videos.",
+    "loading": "Wird geladen…",
+    "tabs": {
+      "photos": "Fotos",
+      "videos": "Videos"
+    }
+  }
 }

@@ -16,6 +16,8 @@ interface ShowImageProps {
   aspectRatio?: string;
   sizes?: string;
   priority?: boolean;
+  /** "cover" (défaut) recadre pour remplir ; "contain" n'affiche jamais l'image rognée (affiches, programmes). */
+  fit?: "cover" | "contain";
 
   //=== OPTIONS pour les deux modes ===
 
@@ -36,6 +38,7 @@ export function ShowImage({
   fill = false,
   alt = "",
   className = "",
+  fit = "cover",
 }: ShowImageProps) {
   // ===================== MODE MEDIA =====================
   if (media) {
@@ -44,28 +47,36 @@ export function ShowImage({
 
     if (media.provider === "cloudinary") {
       if (fill) {
-        return <CloudinaryMedia media={mediaWithAlt} sizes={sizes} priority={priority} className={className} />;
+        return <CloudinaryMedia media={mediaWithAlt} sizes={sizes} priority={priority} className={className} fit={fit} />;
       }
       const ratio =
         aspectRatio ??
         (media.width && media.height ? `${media.width} / ${media.height}` : media.type === "video" ? "16 / 9" : "4 / 3");
       return (
         <div className={`relative w-full overflow-hidden ${className}`} style={{ aspectRatio: ratio }}>
-          <CloudinaryMedia media={mediaWithAlt} sizes={sizes} priority={priority} />
+          <CloudinaryMedia media={mediaWithAlt} sizes={sizes} priority={priority} fit={fit} />
         </div>
       );
     }
 
     // Prestataire non-Cloudinary : next/image classique, pas de frontière client nécessaire
+    const objectFitClass = fit === "contain" ? "object-contain" : "object-cover";
     if (fill) {
       return (
-        <Image src={resolveMediaUrl(media)} alt={resolvedAlt} fill sizes={sizes ?? "100%"} className={className} priority={priority} />
+        <Image
+          src={resolveMediaUrl(media)}
+          alt={resolvedAlt}
+          fill
+          sizes={sizes ?? "100%"}
+          className={className || objectFitClass}
+          priority={priority}
+        />
       );
     }
     const ratio = aspectRatio ?? "4 / 3";
     return (
       <div className={`relative w-full overflow-hidden ${className}`} style={{ aspectRatio: ratio }}>
-        <Image src={resolveMediaUrl(media)} alt={resolvedAlt} fill sizes={sizes ?? "100%"} className="object-cover" priority={priority} />
+        <Image src={resolveMediaUrl(media)} alt={resolvedAlt} fill sizes={sizes ?? "100%"} className={objectFitClass} priority={priority} />
       </div>
     );
   }
